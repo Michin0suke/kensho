@@ -1,0 +1,38 @@
+$ npm run dev
+
+> dir@1.0.0 dev /Users/admin/dir
+> babel-node server/server.js
+
+app listening on 3000
+✖ ｢wdm｣: Hash: 28f93ada8d77d7952359
+Version: webpack 4.31.0
+Time: 310ms
+Built at: 2019-05-18 08:19:04
+    Asset      Size  Chunks             Chunk Names
+bundle.js  6.09 KiB    main  [emitted]  main
+Entrypoint main = bundle.js
+[0] multi ./src 28 bytes {main} [built]
+[./src/index.jsx] 1.93 KiB {main} [built] [failed] [1 error]
+
+ERROR in ./src/index.jsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/admin/dir/src/index.jsx: Unexpected token (5:2)
+
+  3 | 
+  4 | ReactDOM.render(
+> 5 |   <h1>Hello React</h1>,
+    |   ^
+  6 |   document.getElementById('root')
+  7 | );
+    at Parser.raise (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:6322:17)
+    at Parser.unexpected (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:7638:16)
+    at Parser.parseExprAtom (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8799:20)
+    at Parser.parseExprSubscripts (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8385:23)
+    at Parser.parseMaybeUnary (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8365:21)
+    at Parser.parseExprOps (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8252:23)
+    at Parser.parseMaybeConditional (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8225:23)
+    at Parser.parseMaybeAssign (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8172:21)
+    at Parser.parseExprListItem (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:9449:18)
+    at Parser.parseCallExpressionArguments (/Users/admin/dir/node_modules/@babel/parser/lib/index.js:8592:22)
+ @ multi ./src main[0]
+ℹ ｢wdm｣: Failed to compile.
