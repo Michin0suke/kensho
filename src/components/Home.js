@@ -1,68 +1,64 @@
 import React from 'react'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import HorizontalScroll from './Home/HorizontalScroll'
-// import HomeLayout from './Home/HomeLayout'
+import HorizontalScroll from './Home/HomeLayout/HomeLayoutStyle'
+import HomeLayoutList from './Home/HomeLayout/HomeLayoutList'
+import HomeLayout from './Home/HomeLayout/HomeLayout'
 
 export default class Home extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      verticalItems: Array.from({ length: 5 }),
-      horizontalItems: Array.from({ length: 5 })
+      items: HomeLayoutList,
+      homeContents: []
     }
-    this.horizontalCounter = 0
-    this.verticalCounter = 0
   }
 
-  componentDidUpdate () {
+  addHomeContents () {
+    const homeContents = this.state.homeContents.slice()
+    for (let i = 0; i < this.state.items.length; i++) {
+      const contentType = this.state.items[i].contentType
+      if (contentType === 'horizontalScroll') {
+        homeContents.push(
+          <HorizontalScroll
+            key={ i }
+            items={ this.state.items[i].contents }
+            heading={ this.state.items[i].heading }
+          />
+        )
+      }
+    }
+    this.setState({ homeContents: homeContents })
   }
 
-  fetchMoreVerticalData = () => {
-    this.verticalCounter += 1
+  fetchMoreData = () => {
     this.setState({
-      verticalItems: this.state.verticalItems.concat(Array.from({ length: 3 }))
-    })
-  }
-
-  fetchMoreHorizontalData = () => {
-    this.horizontalCounter += 1
-    this.setState({
-      horizontalItems: this.state.horizontalItems.concat(Array.from({ length: 3 }))
+      items: this.state.items.concat(Array.from({ length: 3 }))
     })
   }
 
   render = () => (
-    <div>
+    <Wrapper>
       <Title>Infinity Test</Title>
       <hr/>
-      <p>horizontalItems : {this.state.horizontalItems.length}</p>
-      <p>verticalItems : {this.state.verticalItems.length}</p>
-      <p>count of fetchMoreHorizontalData : {this.horizontalCounter}</p>
-      <p>count of fetchMoreVerticalData : {this.verticalCounter}</p>
-      <HorizontalScroll onScroll={() => this.fetchMoreHorizontalData()} items={this.state.horizontalItems}/>
       <InfiniteScroll
-        dataLength={this.state.verticalItems.length}
-        next={this.fetchMoreVerticalData}
+        dataLength={this.state.items.length}
+        next={this.fetchMoreData}
         hasMore={true}
       >
-        {this.state.verticalItems.map((_, index) =>
-          <Tile key={index}>
-            #{index}
-          </Tile>
-        )}
+        {this.state.items.map((elem, index) => <HomeLayout key={index} items={elem}/>)}
       </InfiniteScroll>
-    </div>
+    </Wrapper>
   )
 }
 
 const Title = styled.h1`
   text-align: center;
   color: dimgray;
+  margin-top: 30px;
+  font-size: 50px;
 `
-const Tile = styled.div`
-  width: 90%;
-  height: 80px;
-  margin: 10px auto;
-  background-color: pink;
+const Wrapper = styled.div`
+  margin: 0;
+  padding: 0;
 `
