@@ -8,14 +8,21 @@ export default class Home extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      items: HomeLayoutList,
+      countOfItems: 2,
+      LayoutListLength: HomeLayoutList.length,
+      items: HomeLayoutList.filter((_, index) => index < 2 + 1),
       homeContents: []
     }
   }
 
   fetchMoreData = () => {
+    const startIndex = this.state.countOfItems % this.state.LayoutListLength
+    const lastIndex = this.state.countOfItems % this.state.LayoutListLength + 1
     this.setState({
-      items: this.state.items.concat(Array.from({ length: 3 }))
+      countOfItems: this.state.countOfItems + 2,
+      items: this.state.items.concat(HomeLayoutList.filter(
+        (_, index) => startIndex <= index || index <= lastIndex
+      ))
     })
   }
 
@@ -25,7 +32,7 @@ export default class Home extends React.Component {
       <hr/>
       <InfiniteScroll
         dataLength={this.state.items.length}
-        // next={this.fetchMoreData}
+        next={this.fetchMoreData}
         hasMore={true}
       >
         {this.state.items.map((elem, index) => <HomeLayout key={index} items={elem}/>)}
