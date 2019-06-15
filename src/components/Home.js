@@ -8,9 +8,9 @@ export default class Home extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      countOfItems: 2,
+      countOfItems: 3,
       LayoutListLength: HomeLayoutList.length,
-      items: HomeLayoutList.filter((_, index) => index < 2 + 1),
+      items: [],
       homeContents: []
     }
   }
@@ -26,9 +26,25 @@ export default class Home extends React.Component {
     })
   }
 
+  componentDidMount () {
+    return fetch('/HomeLayoutList.json')
+      .then(responce => {
+        return responce.json()
+      })
+      .then(json => {
+        const items = []
+        for (let i = 0; i < 3; i++) items.push(...JSON.parse(JSON.stringify(json)))
+        console.log(items)
+        this.setState({ items: items })
+      })
+      .catch(ex => {
+        console.log('parsing failed', ex)
+      })
+  }
+
   render = () => (
     <Wrapper>
-      <Title>Infinity Test</Title>
+      <Title>ポケモンまとめ</Title>
       <hr/>
       <InfiniteScroll
         dataLength={this.state.items.length}

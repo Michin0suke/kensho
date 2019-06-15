@@ -28,6 +28,7 @@ const HorizontalScroll = props => {
 }
 
 const Heading = styled.h1`
+  display: inline;
   font-size: 24px;
   color: dimgray;
   margin-left: 20px;
@@ -36,10 +37,15 @@ const HorizontalSchrollBox = styled.ul`
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  width: 100vw;
+  width: 100%;
   border-top: 2px solid #DDD;
   border-bottom: 2px solid #DDD;
   padding: 10px 20px;
+  margin: 0;
+  box-sizing: border-box;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   `
 const OuterTile = styled.li`
   display: inline-block;
@@ -77,4 +83,5 @@ const Link = styled.a`
   width: 100%;
   height: 100%;
 `
+
 export default HorizontalScroll

@@ -6,7 +6,7 @@ const QuadCards = props => {
   const contents = []
   for (let i = 0; i < props.contents.length; i++) {
     contents.push(
-      <OuterTile>
+      <OuterTile key={i}>
         <Tile key={i} style={{ backgroundImage: `url(${props.contents[i].imageURL})` }}>
           <Link key={i} href={props.contents[i].imageURL} />
         </Tile>
@@ -67,7 +67,7 @@ const Link = styled.a`
 `
 const Name = styled.div`
   display: inline-block;
-  font-size: 20px;
+  font-size: 30px;
   color: dimgray;
   text-align: center;
   width: 100%;
