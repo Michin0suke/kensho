@@ -6,24 +6,32 @@ const HorizontalScroll = props => {
   let contents = []
   for (let i = 0; i < props.contents.length; i++) {
     contents.push(
-      <OutTile>
+      <OuterTile key={'OuterTile' + i}>
         <Tile
-          key={i}
+          key={'Tile' + i}
           style={{ backgroundImage: `url(${props.contents[i].imageURL})` }}>
           <Link href={props.contents[i].imageURL} />
         </Tile>
-        <Name>{props.contents[i].title}</Name>
-      </OutTile>
+        <Name key={'Name' + i}>{props.contents[i].title}</Name>
+      </OuterTile>
     )
   }
   console.log(contents)
   return (
-    <HorizontalSchrollBox>
-      {contents}
-    </HorizontalSchrollBox>
+    <div>
+      <Heading>{props.heading}</Heading>
+      <HorizontalSchrollBox>
+        {contents}
+      </HorizontalSchrollBox>
+    </div>
   )
 }
 
+const Heading = styled.h1`
+  font-size: 24px;
+  color: dimgray;
+  margin-left: 20px;
+`
 const HorizontalSchrollBox = styled.ul`
   overflow-x: auto;
   white-space: nowrap;
@@ -33,7 +41,7 @@ const HorizontalSchrollBox = styled.ul`
   border-bottom: 2px solid #DDD;
   padding: 10px 20px;
   `
-const OutTile = styled.li`
+const OuterTile = styled.li`
   display: inline-block;
   width: 420px;
   height: auto;

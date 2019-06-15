@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import HorizontalScroll from './Home/HomeLayout/HomeLayoutStyle'
 import HomeLayoutList from './Home/HomeLayout/HomeLayoutList'
 import HomeLayout from './Home/HomeLayout/HomeLayout'
 
@@ -12,23 +11,6 @@ export default class Home extends React.Component {
       items: HomeLayoutList,
       homeContents: []
     }
-  }
-
-  addHomeContents () {
-    const homeContents = this.state.homeContents.slice()
-    for (let i = 0; i < this.state.items.length; i++) {
-      const contentType = this.state.items[i].contentType
-      if (contentType === 'horizontalScroll') {
-        homeContents.push(
-          <HorizontalScroll
-            key={ i }
-            items={ this.state.items[i].contents }
-            heading={ this.state.items[i].heading }
-          />
-        )
-      }
-    }
-    this.setState({ homeContents: homeContents })
   }
 
   fetchMoreData = () => {
@@ -43,7 +25,7 @@ export default class Home extends React.Component {
       <hr/>
       <InfiniteScroll
         dataLength={this.state.items.length}
-        next={this.fetchMoreData}
+        // next={this.fetchMoreData}
         hasMore={true}
       >
         {this.state.items.map((elem, index) => <HomeLayout key={index} items={elem}/>)}

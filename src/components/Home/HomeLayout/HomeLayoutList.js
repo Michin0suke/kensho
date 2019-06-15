@@ -30,10 +30,31 @@ const HomeLayoutList = [
     ]
   },
   {
-    contentType: 'largeCard'
+    contentType: 'largeCard',
+    heading: '旅に出かけよう',
+    imageURL: 'https://dime.jp/genre/files/2018/11/1-70-5-770x434.jpg'
   },
   {
-    contentType: 'quadCards'
+    contentType: 'quadCards',
+    heading: 'いろいろロトム',
+    contents: [
+      {
+        title: 'ヒートロトム',
+        imageURL: 'https://www.pokemon.jp/zukan/images/l/5ea1ddc8ef00c99ac0c804980619b9a2.png'
+      },
+      {
+        title: 'ウォッシュロトム',
+        imageURL: 'https://www.pokemon.jp/zukan/images/l/1d45d6ce9f27465bbe0d807e5223fd21.png'
+      },
+      {
+        title: 'フロストロトム',
+        imageURL: 'https://www.pokemon.jp/zukan/images/l/10c010da94d61e101a61a5322e57301b.png'
+      },
+      {
+        title: 'スピンロトム',
+        imageURL: 'https://www.pokemon.jp/zukan/images/l/b8af267012dc21fd186e222ed697f7a5.png'
+      }
+    ]
   }
 ]
 

@@ -1,17 +1,19 @@
 import React from 'react'
 import HorizontalScroll from './HorizontalScroll'
-import styled from 'styled-components'
+import LargeCard from './LargeCard'
+import QuadCards from './QuadCards'
 
 const HomeLayout = props => {
-  if (props.items.contentType === 'horizontalScroll') {
-    return <HorizontalScroll contents={props.items.contents} />
+  switch (props.items.contentType) {
+    case 'horizontalScroll':
+      return <HorizontalScroll heading={props.items.heading} contents={props.items.contents} />
+    case 'largeCard':
+      return <LargeCard heading={props.items.heading} imageURL={props.items.imageURL} />
+    case 'quadCards':
+      return <QuadCards heading={props.items.heading} contents={props.items.contents} />
+    default:
+      return <dev></dev>
   }
-  return <div></div>
 }
-
-const Name = styled.p`
-  font-size: 30px;
-  color: dimgray;
-`
 
 export default HomeLayout
