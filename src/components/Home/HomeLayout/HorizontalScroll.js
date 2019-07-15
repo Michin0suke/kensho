@@ -1,37 +1,67 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
+import media from 'styled-media-query'
+import { Link } from 'react-router-dom'
 
 const HorizontalScroll = props => {
-  console.log('HorizontalScroll', props)
-  let contents = []
-  for (let i = 0; i < props.contents.length; i++) {
-    contents.push(
+  let layout = props.layout
+  let content = props.content.contents
+  let items = []
+  const adNumber = layout.ad_number
+  for (let i in content) {
+    if (i === adNumber) {
+      items.push(
+        <OuterTile key={'AD' + i}>
+          <Tile key={'Tile' + i}>
+            <NLink href={layout.ad_link} target="_blank" rel="nofollow" />
+            <AdImg border="0" width="300" height="250" alt="" src={layout.ad_image} />
+            <img border="0" width="1" height="1" src={layout.ad_tracking} alt="" />
+          </Tile>
+          <Name key={'Name' + i}>{layout.ad_name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'}</Name>
+        </OuterTile>
+      )
+    }
+    // safariでNameの表示が崩れるのを防ぐ
+    const name = content[i].name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'
+    items.push(
       <OuterTile key={'OuterTile' + i}>
         <Tile
           key={'Tile' + i}
-          style={{ backgroundImage: `url(${props.contents[i].imageURL})` }}>
-          <Link href={props.contents[i].imageURL} />
+          style={{ backgroundImage: `url(${content[i].image_url})` }}>
+          <NLink onClick={() => props.onClick(content[i].id)} />
         </Tile>
-        <Name key={'Name' + i}>{props.contents[i].title}</Name>
+        <Name key={'Name' + i}>{name}</Name>
       </OuterTile>
     )
   }
-  console.log(contents)
+  /*
+  items.push(
+    <OuterTile key={1000}>
+      <Link to={`/${layout.endpoint}`}>
+        <Tile>
+          <MoreText>もっとみる</MoreText>
+        </Tile>
+        <Name>{name}</Name>
+      </Link>
+    </OuterTile>
+  )
+  */
   return (
     <div>
-      <Heading>{props.heading}</Heading>
+      <Heading>{layout.heading}</Heading>
       <HorizontalSchrollBox>
-        {contents}
+        {items}
       </HorizontalSchrollBox>
     </div>
   )
 }
 
 const Heading = styled.h1`
-  display: inline;
+  display: inline-block;
   font-size: 24px;
   color: dimgray;
-  margin-left: 20px;
+  margin: 0px 20px;
 `
 const HorizontalSchrollBox = styled.ul`
   overflow-x: auto;
@@ -40,7 +70,7 @@ const HorizontalSchrollBox = styled.ul`
   width: 100%;
   border-top: 2px solid #DDD;
   border-bottom: 2px solid #DDD;
-  padding: 10px 20px;
+  padding: 10px 0;
   margin: 0;
   box-sizing: border-box;
   &::-webkit-scrollbar {
@@ -49,39 +79,75 @@ const HorizontalSchrollBox = styled.ul`
   `
 const OuterTile = styled.li`
   display: inline-block;
-  width: 420px;
+  position: relative;
+  width: 40vw;
+  ${media.greaterThan('medium')`
+    width: 14vw;
+  `}
   height: auto;
-  margin: 15px;
+  margin: 10px;
 `
 const Tile = styled.div`
+  /* 広告用 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* API用 */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   position: relative;
-  display: block;
   text-align: center;
-  width: 420px;
-  height: 420px;
+  width: 100%;
+  height: 40vw;
+  ${media.greaterThan('medium')`
+    height: 14vw;
+  `}
   margin: 0;
   color: white;
-  font-size: 60px;
   border: solid 3px #DDD;
   border-radius: 10px;
   overflow: hidden;
 `
 const Name = styled.div`
-  display: inline-block;
-  font-size: 30px;
+  display: block;
+  font-size: 16px;
+  line-height: 26px;
   color: dimgray;
   text-align: center;
   width: 100%;
+  height: 48px;
+  white-space: normal;
+  overflow: hidden;
+  padding-left: 3px;
 `
-const Link = styled.a`
+/*
+text-overflow: ellipsis;
+display: box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+*/
+const NLink = styled.a`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+`
+const AdImg = styled.img`
+  width: 100%;
+  height: auto;
+`
+const MoreText = styled.p`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding:0;
+  font-size: 20px;
+  color: #E7C296;
+  background-color: #29344B;
 `
 
 export default HorizontalScroll

@@ -3,8 +3,16 @@ html {
   width: 100vw;
 }
 body {
+  margin: 0;
   font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 body::-webkit-scrollbar {
   display: none;
+}
+
+/*Safariだけに適用される新型CSSハック*/
+_::-webkit-full-page-media, _:future, :root .css_selector {
+position: absolute;
+top: 15px;
+text-align: center;
 }

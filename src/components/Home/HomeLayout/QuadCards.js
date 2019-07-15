@@ -1,24 +1,27 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
+import media from 'styled-media-query'
 
 const QuadCards = props => {
-  console.log(props)
-  const contents = []
-  for (let i = 0; i < props.contents.length; i++) {
-    contents.push(
+  const layout = props.layout
+  const contents = props.content.contents
+  const items = []
+  for (let i in contents) {
+    items.push(
       <OuterTile key={i}>
-        <Tile key={i} style={{ backgroundImage: `url(${props.contents[i].imageURL})` }}>
-          <Link key={i} href={props.contents[i].imageURL} />
+        <Tile key={i} style={{ backgroundImage: `url(${contents[i].image_url})` }}>
+          <Link key={i} onClick={() => props.onClick(contents[i].id)} />
         </Tile>
-        <Name key={'Name' + i}>{props.contents[i].title}</Name>
+        <Name key={'Name' + i}>{contents[i].name}</Name>
       </OuterTile>
     )
   }
   return (
     <ContentsBox>
-      <Heading>{props.heading}</Heading>
+      <Heading>{layout.heading}</Heading>
       <QuadBox>
-        {contents}
+        {items}
       </QuadBox>
     </ContentsBox>
   )
@@ -31,7 +34,7 @@ const ContentsBox = styled.div`
 const Heading = styled.h1`
   font-size: 24px;
   color: dimgray;
-  margin-left: 20px;
+  margin: 8px 13px;
 `
 const QuadBox = styled.div`
   display: flex;
@@ -42,13 +45,19 @@ const QuadBox = styled.div`
 `
 const OuterTile = styled.div`
   position: relative;
-  width: 45%;
-  margin: 10px;
+  width: 47%;
+  ${media.greaterThan('medium')`
+    width: 23%;
+  `}
+  margin: 10px 0;
 `
 const Tile = styled.div`
   position: relative;
   width: 100%;
   height: 40vw;
+  ${media.greaterThan('medium')`
+    height: 22vw;
+  `}
   margin: 0 auto;
   background-size: cover;
   background-repeat: no-repeat;
@@ -67,7 +76,7 @@ const Link = styled.a`
 `
 const Name = styled.div`
   display: inline-block;
-  font-size: 30px;
+  font-size: 16px;
   color: dimgray;
   text-align: center;
   width: 100%;
