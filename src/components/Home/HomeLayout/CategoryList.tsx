@@ -4,10 +4,15 @@ import styled from 'styled-components'
 import media from 'styled-media-query'
 import { Link } from 'react-router-dom'
 
-const CategoryList = props => {
+type Props = {
+  categoryList: { [key: string]: string }
+  layout: any
+}
+
+const CategoryList = (props: Props) => {
   let contents = props.categoryList
   let layout = props.layout
-  let items = []
+  let items: any = []
   Object.keys(contents).forEach((key, i) => {
     items.push(
       <OuterTile key={'OuterTile' + i}>

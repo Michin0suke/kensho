@@ -3,8 +3,19 @@ import styled from 'styled-components'
 import HomeLayout from './HomeLayout/HomeLayout'
 import Id from '../Id/Id'
 
-export default class Home extends React.Component {
-  constructor (props) {
+interface Props {}
+
+interface State {
+  countOfContents: number,
+  layoutsLength: number,
+  isId: number,
+  layouts: any[],
+  contents: any[],
+  categoryList: { [key: string]: string }
+}
+
+export default class Home extends React.Component<Props, State> {
+  constructor (props: Props) {
     super(props)
     this.state = {
       countOfContents: 3,
@@ -12,7 +23,7 @@ export default class Home extends React.Component {
       isId: 0,
       layouts: [],
       contents: [],
-      categoryList: []
+      categoryList: {}
     }
   }
 
@@ -58,7 +69,7 @@ export default class Home extends React.Component {
     })
   }
 
-  onClickId = id => {
+  onClickId = (id: number) => {
     if (id !== undefined) {
       this.setState({ isId: id })
     } else {
@@ -89,7 +100,7 @@ export default class Home extends React.Component {
           .filter(c => c.contents)
           .map(c => c.contents)
           .map(c =>
-            c.filter(s => s.id === this.state.isId)[0]
+            c.filter((s: any) => s.id === this.state.isId)[0]
           )
           .filter(c => c !== undefined)[0]
         if (contents !== undefined) {

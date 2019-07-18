@@ -2,7 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 
-const CategoryContent = props => (
+type Props = {
+  content: {
+    image_url: string
+    id: number
+    name: string
+  }
+  onClick: (id: number) => void
+}
+
+const CategoryContent = (props: Props) => (
   <OuterTile>
     <Tile style={{ backgroundImage: `url(${props.content.image_url})` }}>
       <Link onClick={() => props.onClick(props.content.id)} />

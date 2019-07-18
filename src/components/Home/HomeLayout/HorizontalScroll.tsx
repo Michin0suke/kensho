@@ -4,7 +4,13 @@ import styled from 'styled-components'
 import media from 'styled-media-query'
 import { Link } from 'react-router-dom'
 
-const HorizontalScroll = props => {
+type Props = {
+  layout: any
+  content: any
+  onClick: (id: number) => void
+}
+
+const HorizontalScroll = (props: Props) => {
   let layout = props.layout
   let content = props.content.contents
   let items = []
@@ -15,8 +21,8 @@ const HorizontalScroll = props => {
         <OuterTile key={'AD' + i}>
           <Tile key={'Tile' + i}>
             <NLink href={layout.ad_link} target="_blank" rel="nofollow" />
-            <AdImg border="0" width="300" height="250" alt="" src={layout.ad_image} />
-            <img border="0" width="1" height="1" src={layout.ad_tracking} alt="" />
+            <AdImg alt="" src={layout.ad_image} />
+            <img width="1" height="1" src={layout.ad_tracking} alt="" />
           </Tile>
           <Name key={'Name' + i}>{layout.ad_name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'}</Name>
         </OuterTile>
@@ -138,6 +144,7 @@ const NLink = styled.a`
 const AdImg = styled.img`
   width: 100%;
   height: auto;
+  border: 0;
 `
 const MoreText = styled.p`
   display: inline-block;

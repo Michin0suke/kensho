@@ -1,19 +1,5 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "standard"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -21,13 +7,33 @@
         "ecmaVersion": 6,
         "sourceType": "module"
     },
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "standard"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
     "plugins": [
-        "react"
+        "react",
+        "typescript",
+        "react-hooks",
+        "jest",
+        "prettier"
     ],
     "rules": {
         "no-console": "off",
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
-        "no-var":"warn"
+        "no-var":"warn",
+        "@typescript-eslint/indent": ["error", 2]
     }
 }
