@@ -4,8 +4,24 @@ import media from 'styled-media-query'
 import { Link } from 'react-router-dom'
 import CountDown from './CountDown'
 
-export default class Id extends React.Component {
-  constructor (props) {
+type IdProps = {
+  contents: {
+    id: number,
+    name: string,
+    winner: number,
+    image_url: string,
+    limit_date: Date,
+    link: string,
+    provider: string,
+    way: string,
+    category: string[]
+  }
+  onClick: (id: number) => void
+}
+
+export default class Id extends React.Component<IdProps> {
+  state: { contents: never[]; countDown: string;};
+  constructor (props: IdProps) {
     super(props)
     this.state = {
       contents: [],
@@ -47,26 +63,26 @@ export default class Id extends React.Component {
   }
 
   render = () => {
-    const c = this.props.contents
+    const c: IdProps['contents'] = this.props.contents
     const l = new Date(c.limit_date)
     const month = l.getMonth() + 1 + '月'
-    let date
-    let hours
+    let date: string
+    let hours: string
     if (l.getHours() - 9 === 0) {
       date = l.getDate() + '日'
       hours = ''
     } else {
       if (l.getHours() >= 9) {
-        date = l.getDate() + '日'
-        hours = ' ' + l.getHours() - 9 + '時'
+        date = l.getDate().toString() + '日'
+        hours = ' ' + (l.getHours() - 9).toString() + '時'
       } else {
-        date = l.getDate() - 1 + '日'
-        hours = ' ' + l.getHours() - 9 + 24 + '時'
+        date = (l.getDate() - 1).toString() + '日'
+        hours = ' ' + (l.getHours() - 9 + 24).toString() + '時'
       }
     }
 
     return (
-      <Wrapper onClick={() => this.props.onClick()} ontouchstart="">
+      <Wrapper onClick={() => this.props.onClick()}>
         <ContentBox>
           <Image style={{ backgroundImage: `url(${c.image_url})` }} />
           <Name>{c.name}</Name>

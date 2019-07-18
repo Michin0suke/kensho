@@ -1,8 +1,10 @@
-const countDown = limit => {
-  let now = new Date()
-  now = now.setHours(now.getHours() + 9)
+const CountDown = (limit: Date) => {
+  const now = new Date()
+  const nowNum: number = now.setHours(now.getHours() + 9)
 
-  let diff = limit - now
+  const limitNum: number = limit.getTime()
+
+  let diff: number = limitNum - nowNum
 
   if (diff < 0) {
     return '終了しました。'
@@ -18,18 +20,13 @@ const countDown = limit => {
 
   if (days !== 0) {
     disp += `${days}日`
-    disp += `${hours}時間 `
+    disp += `${hours}時間`
   } else if (hours !== 0) {
-    disp += `${hours}時間 `
+    disp += `${hours}時間`
   }
   disp += `${minutes}分`
 
   return disp
 }
-const limit = new Date('2019-07-13T23:25:00Z')
-console.log(countDown(limit))
-/*
-setInterval(() => {
-  console.log(difference(limit))
-}, 1000)
-*/
+
+export default CountDown

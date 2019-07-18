@@ -2,6 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 
+type Props = {
+  layout: any
+  content: any
+}
+
 const prizzSvg =
   <g id="prizz" data-name="prizz">
     <path d="M61.08,11.34a3.55,3.55,0,1,1,7.1,0,3.55,3.55,0,1,1-7.1,0Z"/>
@@ -11,7 +16,7 @@ const prizzSvg =
     <rect x="61.96" y="21.13" width="5.33" height="41.07"/>
   </g>
 
-const TopImage = props => {
+const TopImage = (props: Props) => {
   const layout = props.layout
   return (
     <Frame>

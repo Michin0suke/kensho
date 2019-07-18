@@ -3,7 +3,13 @@ import React from 'react'
 import styled from 'styled-components'
 import media from 'styled-media-query'
 
-const QuadCards = props => {
+type Props = {
+  layout: any
+  content: any
+  onClick: (id: number) => void
+}
+
+const QuadCards = (props: Props) => {
   const layout = props.layout
   const contents = props.content.contents
   const items = []

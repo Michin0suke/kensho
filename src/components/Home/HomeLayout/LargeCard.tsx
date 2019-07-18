@@ -3,10 +3,18 @@ import styled from 'styled-components'
 import media from 'styled-media-query'
 import { Link } from 'react-router-dom'
 
-const LargeCard = props => (
+type Props = {
+  content: {
+    link: string,
+    image_url: string,
+    heading: string
+  }
+}
+
+const LargeCard = (props: Props) => (
   <Link to={props.content.link}>
     <Tile style={{ backgroundImage: `url(${props.content.image_url})` }}>
-      <Gradation/>
+      <Gradation />
       <Heading>{props.content.heading}</Heading>
     </Tile>
   </Link>
@@ -15,7 +23,7 @@ const LargeCard = props => (
 const Tile = styled.div`
   position: relative;
   width: 85vw;
-  height: calc(85vw/1.6);
+  height: calc(85vw / 1.6);
   ${media.greaterThan('medium')`
     height: calc(85vw/3)
   `}
@@ -23,7 +31,7 @@ const Tile = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  border: solid 3px #DDD;
+  border: solid 3px #ddd;
   border-radius: 10px;
   overflow: hidden;
 `
@@ -49,7 +57,7 @@ const Gradation = styled.div`
   width: 100%;
   height: 100%;
   user-select: none;
-  background: linear-gradient(rgba(0,0,0,0) 70%, #444 100%);
+  background: linear-gradient(rgba(0, 0, 0, 0) 70%, #444 100%);
 `
 
 export default LargeCard
