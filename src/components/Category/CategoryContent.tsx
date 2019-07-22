@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+// import media from 'styled-media-query'
 
-type Props = {
+interface Props {
   content: {
-    image_url: string
-    id: number
-    name: string
+    'image_url': string
+    'id': number
+    'name': string
   }
   onClick: (id: number) => void
 }
@@ -24,11 +24,11 @@ const OuterTile = styled.div`
   width: 43%;
   height: 50vw;
   margin: 5vw 3vw;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     width: 21%;
     height: 25vw;
     margin: 5vw 1.9vw;
-  `}
+  `} */
   float: left;
   position: relative;
 `
@@ -36,9 +36,9 @@ const Tile = styled.div`
   position: relative;
   width: 100%;
   height: 42vw;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     height: 22vw;
-  `}
+  `} */
   margin: 0 auto;
   background-size: cover;
   background-repeat: no-repeat;

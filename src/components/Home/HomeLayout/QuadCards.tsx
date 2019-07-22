@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+// import media from 'styled-media-query'
 
-type Props = {
+interface Props {
   layout: any
   content: any
   onClick: (id: number) => void
@@ -52,18 +52,18 @@ const QuadBox = styled.div`
 const OuterTile = styled.div`
   position: relative;
   width: 47%;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     width: 23%;
-  `}
+  `} */
   margin: 10px 0;
 `
 const Tile = styled.div`
   position: relative;
   width: 100%;
   height: 40vw;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     height: 22vw;
-  `}
+  `} */
   margin: 0 auto;
   background-size: cover;
   background-repeat: no-repeat;

@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import HomeLayout from './HomeLayout/HomeLayout'
 import Id from '../Id/Id'
 
-interface Props {}
-
 interface State {
   countOfContents: number,
   layoutsLength: number,
@@ -14,8 +12,8 @@ interface State {
   categoryList: { [key: string]: string }
 }
 
-export default class Home extends React.Component<Props, State> {
-  constructor (props: Props) {
+export default class Home extends React.Component<{}, State> {
+  public constructor (props: {}) {
     super(props)
     this.state = {
       countOfContents: 3,
@@ -27,7 +25,7 @@ export default class Home extends React.Component<Props, State> {
     }
   }
 
-  componentDidMount () {
+  public componentDidMount () {
     fetch('https://prizz.jp/homeLayout.json')
       .then(responce => responce.json())
       .then(json => {
@@ -62,14 +60,14 @@ export default class Home extends React.Component<Props, State> {
       })
   }
 
-  fetchMoreData = () => {
+  public fetchMoreData = () => {
     const layouts = this.state.layouts.slice()
     this.setState({
       layouts: layouts.concat(layouts)
     })
   }
 
-  onClickId = (id: number) => {
+  public onClickId = (id: number) => {
     if (id !== undefined) {
       this.setState({ isId: id })
     } else {
@@ -78,7 +76,7 @@ export default class Home extends React.Component<Props, State> {
     }
   }
 
-  render = () => {
+  public render = () => {
     let renderContents = []
     // stateがcontentsとlayoutの両方反映されているときのみ実行する。
     if (this.state.layouts.length === this.state.contents.length && this.state.contents.length !== 0) {
