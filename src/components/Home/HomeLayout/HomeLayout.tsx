@@ -5,7 +5,7 @@ import HorizontalScroll from './HorizontalScroll'
 import LargeCard from './LargeCard'
 import QuadCards from './QuadCards'
 
-type Props = {
+interface Props {
   layout: any
   content: any
   categoryList: {
@@ -14,7 +14,7 @@ type Props = {
   onClick: (id: number) => void
 }
 
-const HomeLayout = (props:Props) => {
+const HomeLayout = (props: Props) => {
   switch (props.layout.renderType) {
     case 'categoryList':
       return <CategoryList layout={props.layout} categoryList={props.categoryList}/>

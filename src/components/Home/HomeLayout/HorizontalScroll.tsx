@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
-import { Link } from 'react-router-dom'
+// import media from 'styled-media-query'
 
-type Props = {
+interface Props {
   layout: any
   content: any
   onClick: (id: number) => void
@@ -19,9 +18,9 @@ const HorizontalScroll = (props: Props) => {
     if (i === adNumber) {
       items.push(
         <OuterTile key={'AD' + i}>
-          <Tile key={'Tile' + i}>
+          <Tile>
             <NLink href={layout.ad_link} target="_blank" rel="nofollow" />
-            <AdImg alt="" src={layout.ad_image} />
+            <AdImg alt={layout.ad_name} src={layout.ad_image} />
             <img width="1" height="1" src={layout.ad_tracking} alt="" />
           </Tile>
           <Name key={'Name' + i}>{layout.ad_name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'}</Name>
@@ -31,13 +30,13 @@ const HorizontalScroll = (props: Props) => {
     // safariでNameの表示が崩れるのを防ぐ
     const name = content[i].name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'
     items.push(
-      <OuterTile key={'OuterTile' + i}>
-        <Tile
-          key={'Tile' + i}
-          style={{ backgroundImage: `url(${content[i].image_url})` }}>
+      <OuterTile key={i}>
+        <Tile>
           <NLink onClick={() => props.onClick(content[i].id)} />
+          <Img alt={content[i].name} src={content[i].image_url} />
+          <a href={content[i].link} />
         </Tile>
-        <Name key={'Name' + i}>{name}</Name>
+        <Name>{name}</Name>
       </OuterTile>
     )
   }
@@ -87,13 +86,13 @@ const OuterTile = styled.li`
   display: inline-block;
   position: relative;
   width: 40vw;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     width: 14vw;
-  `}
+  `} */
   height: auto;
   margin: 10px;
 `
-const Tile = styled.div`
+const Tile = styled.article`
   /* 広告用 */
   display: flex;
   flex-direction: column;
@@ -107,16 +106,16 @@ const Tile = styled.div`
   text-align: center;
   width: 100%;
   height: 40vw;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     height: 14vw;
-  `}
+  `} */
   margin: 0;
   color: white;
   border: solid 3px #DDD;
   border-radius: 10px;
   overflow: hidden;
 `
-const Name = styled.div`
+const Name = styled.p`
   display: block;
   font-size: 16px;
   line-height: 26px;
@@ -141,11 +140,17 @@ const NLink = styled.a`
   width: 100%;
   height: 100%;
 `
+const Img = styled.img`
+  width: 100%;
+  height: auto;
+  border: 0;
+`
 const AdImg = styled.img`
   width: 100%;
   height: auto;
   border: 0;
 `
+/*
 const MoreText = styled.p`
   display: inline-block;
   width: 100%;
@@ -156,5 +161,6 @@ const MoreText = styled.p`
   color: #E7C296;
   background-color: #29344B;
 `
+*/
 
 export default HorizontalScroll

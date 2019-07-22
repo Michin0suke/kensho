@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+// import media from 'styled-media-query'
 import { Link } from 'react-router-dom'
 import CountDown from './CountDown'
 
@@ -128,9 +128,9 @@ const Wrapper = styled.div`
 const ContentBox = styled.div`
   position: relative;
   width: 85%;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     width: 50%;
-  `}
+  `} */
   height: auto;
   border-radius: 10px;
   margin: 30px auto;
@@ -141,10 +141,10 @@ const ContentBox = styled.div`
 const Image = styled.img`
   width: 35vw;
   height: 35vw;
-  ${media.greaterThan('medium')`
+  /* ${media.greaterThan('medium')`
     width: 20vw;
     height: 20vw;
-  `}
+  `} */
   display: block;
   margin: 0 auto;
   background-repeat: no-repeat;

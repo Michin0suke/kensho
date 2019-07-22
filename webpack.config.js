@@ -3,30 +3,12 @@ const path = require('path')
 
 module.exports = {
   context: path.join(__dirname, '/src/'),
-  entry: './index.js',
+  entry: [ './index.js' ],
   resolve: {
-    extensions: ['.ts', '.js', '.tsx', '.jsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
-  devtool: 'inline-source-map',
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        enforce: 'pre',
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-env'
-            ],
-            plugins: [
-              ['@babel/plugin-proposal-class-properties', { 'loose': true }],
-              'babel-plugin-styled-components'
-            ]
-          }
-        }]
-      },
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
@@ -35,38 +17,58 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [
-                '@babel/preset-react',
-                '@babel/preset-env',
+                ['@babel/preset-env',
+                  {
+                    'targets': { 'browsers': [ 'chrome 40', 'ie >= 11' ] },
+                    'useBuiltIns': 'usage',
+                    'corejs': 3
+                  }
+                ],
+                ['@babel/preset-react',
+                  {
+                    'useBuiltIns': 'usage'
+                  }
+                ],
                 '@babel/preset-typescript'
               ],
               plugins: [
-                ['@babel/plugin-proposal-class-properties', { 'loose': true }],
-                'babel-plugin-styled-components'
+                '@babel/plugin-proposal-class-properties',
+                'babel-plugin-styled-components',
+                '@babel/plugin-transform-object-assign'
               ]
             }
           }
         ]
       },
       {
-        test: /\.css$/,
+        test: /\.js(x?)$/,
+        exclude: /node_modules/,
         use: [
-          'style-loader',
-          'css-loader',
           {
-            loader: 'postcss-loader',
+            loader: 'babel-loader',
             options: {
-              plugins: function () {
-                return [
-                  require('autoprefixer')
+              presets: [
+                ['@babel/preset-env',
+                  {
+                    'targets': { 'browsers': [ 'chrome 40', 'ie >= 11' ] },
+                    'useBuiltIns': 'usage',
+                    'corejs': 3
+                  }
+                ],
+                ['@babel/preset-react',
+                  {
+                    'useBuiltIns': 'usage'
+                  }
                 ]
-              }
+              ],
+              plugins: [
+                'babel-plugin-styled-components',
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-transform-object-assign'
+              ]
             }
           }
         ]
-      },
-      {
-        test: /\.(jpg|png)$/,
-        use: 'url-loader'
       }
     ]
   },
