@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import media from 'styled-media-query'
+import media from '../../MediaQuery'
 import { Link } from 'react-router-dom'
 
 interface Props {
@@ -24,9 +24,9 @@ const Tile = styled.div`
   position: relative;
   width: 85vw;
   height: calc(85vw / 1.6);
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     height: calc(85vw/3)
-  `} */
+  `}
   margin: 30px auto;
   background-size: cover;
   background-repeat: no-repeat;
@@ -40,9 +40,9 @@ const Heading = styled.h1`
   bottom: 0;
   display: inline-block;
   font-size: 5vw;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     font-size: 40px;
-  `} */
+  `}
   width: 100%;
   text-align: center;
   user-select: none;

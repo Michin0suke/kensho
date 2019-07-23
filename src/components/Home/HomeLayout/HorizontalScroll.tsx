@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-// import media from 'styled-media-query'
+import media from '../../MediaQuery'
 
 interface Props {
   layout: any
@@ -86,9 +86,9 @@ const OuterTile = styled.li`
   display: inline-block;
   position: relative;
   width: 40vw;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     width: 14vw;
-  `} */
+  `}
   height: auto;
   margin: 10px;
 `
@@ -106,9 +106,9 @@ const Tile = styled.article`
   text-align: center;
   width: 100%;
   height: 40vw;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     height: 14vw;
-  `} */
+  `}
   margin: 0;
   color: white;
   border: solid 3px #DDD;

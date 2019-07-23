@@ -5,7 +5,7 @@ module.exports = {
   context: path.join(__dirname, '/src/'),
   entry: [ './index.js' ],
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.jpg', '.png']
   },
   module: {
     rules: [
@@ -50,7 +50,10 @@ module.exports = {
               presets: [
                 ['@babel/preset-env',
                   {
-                    'targets': { 'browsers': [ 'chrome 40', 'ie >= 11' ] },
+                    'targets': {
+                      'chrome': '40',
+                      'ie': '11'
+                    },
                     'useBuiltIns': 'usage',
                     'corejs': 3
                   }
@@ -69,6 +72,27 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('autoprefixer')
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(jpg|png)$/,
+        use: 'url-loader'
       }
     ]
   },

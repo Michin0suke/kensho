@@ -1,27 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
-// import media from 'styled-media-query'
+import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
 import CountDown from './CountDown'
 
-type IdProps = {
+interface IdProps {
   contents: {
-    id: number,
-    name: string,
-    winner: number,
-    image_url: string,
-    limit_date: Date,
-    link: string,
-    provider: string,
-    way: string,
-    category: string[]
+    'id': number,
+    'name': string,
+    'winner': number,
+    'image_url': string,
+    'limit_date': Date,
+    'link': string,
+    'provider': string,
+    'way': string,
+    'category': string[]
   }
-  onClick: (id: number) => void
+  onClick: (id?: number) => void
 }
 
 export default class Id extends React.Component<IdProps> {
-  state: { contents: never[]; countDown: string;};
-  constructor (props: IdProps) {
+  public state: { contents: never[]; countDown: string;};
+  public constructor (props: IdProps) {
     super(props)
     this.state = {
       contents: [],
@@ -29,10 +29,10 @@ export default class Id extends React.Component<IdProps> {
     }
   }
 
-  controller1 = new AbortController()
-  controller2 = new AbortController()
+  public controller1 = new AbortController()
+  public controller2 = new AbortController()
 
-  componentDidMount () {
+  public componentDidMount () {
     // const id = this.props.match.params.id
     const id = this.props.contents.id
     console.log(`https://api.prizz.jp/search/${id}`)
@@ -57,12 +57,12 @@ export default class Id extends React.Component<IdProps> {
     setInterval(() => this.setState({ countDown: CountDown(limit) }), 1000)
   }
 
-  componentWillUnmount () {
+  public componentWillUnmount () {
     this.controller1.abort()
     this.controller2.abort()
   }
 
-  render = () => {
+  public render = () => {
     const c: IdProps['contents'] = this.props.contents
     const l = new Date(c.limit_date)
     const month = l.getMonth() + 1 + '月'
@@ -128,9 +128,9 @@ const Wrapper = styled.div`
 const ContentBox = styled.div`
   position: relative;
   width: 85%;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     width: 50%;
-  `} */
+  `}
   height: auto;
   border-radius: 10px;
   margin: 30px auto;
@@ -141,10 +141,10 @@ const ContentBox = styled.div`
 const Image = styled.img`
   width: 35vw;
   height: 35vw;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     width: 20vw;
     height: 20vw;
-  `} */
+  `}
   display: block;
   margin: 0 auto;
   background-repeat: no-repeat;
