@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import media from 'styled-media-query'
+import media from '../../MediaQuery'
 
 interface Props {
   layout: any
@@ -33,9 +33,9 @@ const Frame = styled.div`
   position: relative;
   width: 100%;
   height: calc(100vw / 1.6);
-  /* ${media.greaterThan('large')`
+  ${media.greaterThan('large')`
     height: 100vh;
-  `} */
+  `}
   margin: 0;
   margin-bottom: 30px;
   padding: 0;
@@ -51,10 +51,10 @@ const Image = styled.div`
 const Heading = styled.h1`
   font-size: 5vw;
   margin-bottom: 10px;
-  /* ${media.greaterThan('large')`
+  ${media.greaterThan('large')`
     font-size: 3vw;
     margin-bottom: 20px;
-  `} */
+  `}
   position: absolute;
   color: white;
   text-align: center;
@@ -84,9 +84,9 @@ const TopLogo = styled.svg`
   top: 4%;
   left: 3%;
   width: 10%;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     width: 5%;
-  `} */
+  `}
 `
 
 export default TopImage

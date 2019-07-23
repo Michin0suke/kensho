@@ -1,7 +1,3 @@
-const func = () => {
-  const first = (...args: string[]) => {
-    console.log(args)
-  }
-}
+const func = (...arr: number[]) => console.log(...arr)
 
-func.first('hello world')
+func(1, 2, 3)

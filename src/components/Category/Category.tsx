@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import CategoryContent from './CategoryContent'
-// import media from 'styled-media-query'
+import media from '../MediaQuery'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import Id from '../Id/Id'
 
@@ -152,13 +152,13 @@ const Header = styled.h1`
   font-size: 6vw;
   height: 9vw;
   padding: 3vw 0 2vw;
-  /*
+  
   ${media.greaterThan('medium')`
     font-size: 3vw;
     height: 3vw;
     padding: 0.7vw 0 2vw;
   `}
-  */
+ 
   margin: 0;
   margin-bottom: 2vw;
   position: fixed;
@@ -174,11 +174,11 @@ const PrizzLogo = styled.svg`
   width: 8vw;
   top: 5vw;
   left: 3vw;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     width: 4vw;
     top: 1.5vw;
     left: 1.5vw;
-  `} */
+  `}
   position: fixed;
   fill: #e7c296;
   z-index: 20;
@@ -186,9 +186,9 @@ const PrizzLogo = styled.svg`
 const Margin = styled.div`
   width: 100%;
   height: 15vw;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     height: 5vw;
-  `} */
+  `}
 `
 /*
 const ContentsBox = styled.div`
