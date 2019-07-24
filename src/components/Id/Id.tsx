@@ -57,6 +57,7 @@ export default class Id extends React.Component<IdProps> {
     setInterval(() => this.setState({ countDown: CountDown(limit) }), 1000)
   }
 
+  // アンマウント時に実行中のfetchを中断
   public componentWillUnmount () {
     this.controller1.abort()
     this.controller2.abort()
@@ -132,11 +133,14 @@ const ContentBox = styled.div`
     width: 50%;
   `}
   height: auto;
+  max-height: 80%;
   border-radius: 10px;
   margin: 30px auto;
   padding: 16px;
   background-color: white;
   z-index: 110;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `
 const Image = styled.img`
   width: 35vw;
