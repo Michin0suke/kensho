@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+import media from '../MediaQuery'
 
-type Props = {
+interface Props {
   content: {
-    image_url: string
-    id: number
-    name: string
+    'image_url': string
+    'id': number
+    'name': string
   }
   onClick: (id: number) => void
 }

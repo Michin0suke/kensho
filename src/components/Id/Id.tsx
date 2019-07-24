@@ -1,27 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
 import CountDown from './CountDown'
 
-type IdProps = {
+interface IdProps {
   contents: {
-    id: number,
-    name: string,
-    winner: number,
-    image_url: string,
-    limit_date: Date,
-    link: string,
-    provider: string,
-    way: string,
-    category: string[]
+    'id': number,
+    'name': string,
+    'winner': number,
+    'image_url': string,
+    'limit_date': Date,
+    'link': string,
+    'provider': string,
+    'way': string,
+    'category': string[]
   }
-  onClick: (id: number) => void
+  onClick: (id?: number) => void
 }
 
 export default class Id extends React.Component<IdProps> {
-  state: { contents: never[]; countDown: string;};
-  constructor (props: IdProps) {
+  public state: { contents: never[]; countDown: string;};
+  public constructor (props: IdProps) {
     super(props)
     this.state = {
       contents: [],
@@ -29,10 +29,10 @@ export default class Id extends React.Component<IdProps> {
     }
   }
 
-  controller1 = new AbortController()
-  controller2 = new AbortController()
+  public controller1 = new AbortController()
+  public controller2 = new AbortController()
 
-  componentDidMount () {
+  public componentDidMount () {
     // const id = this.props.match.params.id
     const id = this.props.contents.id
     console.log(`https://api.prizz.jp/search/${id}`)
@@ -57,12 +57,13 @@ export default class Id extends React.Component<IdProps> {
     setInterval(() => this.setState({ countDown: CountDown(limit) }), 1000)
   }
 
-  componentWillUnmount () {
+  // アンマウント時に実行中のfetchを中断
+  public componentWillUnmount () {
     this.controller1.abort()
     this.controller2.abort()
   }
 
-  render = () => {
+  public render = () => {
     const c: IdProps['contents'] = this.props.contents
     const l = new Date(c.limit_date)
     const month = l.getMonth() + 1 + '月'
@@ -132,11 +133,14 @@ const ContentBox = styled.div`
     width: 50%;
   `}
   height: auto;
+  max-height: 80%;
   border-radius: 10px;
   margin: 30px auto;
   padding: 16px;
   background-color: white;
   z-index: 110;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `
 const Image = styled.img`
   width: 35vw;

@@ -2,15 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import CategoryContent from './CategoryContent'
-import media from 'styled-media-query'
+import media from '../MediaQuery'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import Id from '../Id/Id'
 
 interface CategoryRouterProps {
   category: any
-}
-
-interface Props extends RouteComponentProps<CategoryRouterProps> {
 }
 
 interface State {
@@ -19,8 +16,8 @@ interface State {
   categoryList: []
 }
 
-export default class Category extends React.Component<Props, State> {
-  constructor (props: Props) {
+export default class Category extends React.Component<RouteComponentProps<CategoryRouterProps>, State> {
+  public constructor (props: RouteComponentProps<CategoryRouterProps>) {
     super(props)
     this.state = {
       contents: [],
@@ -29,7 +26,7 @@ export default class Category extends React.Component<Props, State> {
     }
   }
 
-  componentDidMount () {
+  public componentDidMount () {
     const category = this.props.match.params.category
     const limit = 12
 
@@ -59,7 +56,7 @@ export default class Category extends React.Component<Props, State> {
     }
   }
 
-  prizzSvg = (
+  public prizzSvg = (
     <g id="prizz" data-name="prizz">
       <path d="M61.08,11.34a3.55,3.55,0,1,1,7.1,0,3.55,3.55,0,1,1-7.1,0Z" />
       <path d="M54.81,26.37l2.64-4.8a17.21,17.21,0,0,0-3.82-.44c-9.61,0-17.41,3.75-17.41,23.46V62.2H41.4V44.59c0-16,5.47-18.28,12.23-18.28A11.51,11.51,0,0,1,54.81,26.37Z" />
@@ -69,7 +66,7 @@ export default class Category extends React.Component<Props, State> {
     </g>
   )
 
-  fetchMoreData = () => {
+  public fetchMoreData = () => {
     const category = this.props.match.params.category
     const offset = this.state.contents.length
     const limit = 4
@@ -82,7 +79,7 @@ export default class Category extends React.Component<Props, State> {
       })
   }
 
-  onClickId = (id: number | undefined) => {
+  public onClickId = (id: number | undefined) => {
     if (id !== undefined) {
       this.setState({ isId: id })
     } else {
@@ -91,7 +88,7 @@ export default class Category extends React.Component<Props, State> {
     }
   }
 
-  render = () => {
+  public render = () => {
     let header: string = this.props.match.params.category
     if (this.state.categoryList) {
       header = this.state.categoryList[this.props.match.params.category]
@@ -155,11 +152,13 @@ const Header = styled.h1`
   font-size: 6vw;
   height: 9vw;
   padding: 3vw 0 2vw;
+  
   ${media.greaterThan('medium')`
     font-size: 3vw;
     height: 3vw;
     padding: 0.7vw 0 2vw;
   `}
+ 
   margin: 0;
   margin-bottom: 2vw;
   position: fixed;

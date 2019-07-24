@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+import media from '../../MediaQuery'
 
-type Props = {
+interface Props {
   layout: any
   content: any
   onClick: (id: number) => void

@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from 'styled-media-query'
+import media from '../../MediaQuery'
 import { Link } from 'react-router-dom'
 
-type Props = {
+interface Props {
   content: {
-    link: string,
-    image_url: string,
-    heading: string
+    'link': string,
+    'image_url': string,
+    'heading': string
   }
 }
 
