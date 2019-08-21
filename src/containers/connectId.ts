@@ -8,11 +8,11 @@ import CountDown from '../components/Id/CountDown'
 const controller1 = new AbortController()
 const controller2 = new AbortController()
 
-const mapStateToProps = ({ id, home }: {id: any, home: any}) => ({
+const mapStateToProps = ({ categoryList, id, home }: {categoryList: {}, id: any, home: any}) => ({
   showId: id.id,
   isShow: id.isShow,
   content: id.content,
-  categories: home.categories,
+  categoryList,
   controller1,
   controller2,
   countdown: id.countdown

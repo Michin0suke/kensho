@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
+import categoryList from '../../module/categoryList';
 
 interface Props {
   hideId: () => null
@@ -11,7 +12,7 @@ interface Props {
   showId: number,
   isShow: boolean,
   content: any,
-  categories: any,
+  categoryList: {[key: string]: string},
   id: number,
   controller1: AbortController,
   controller2: AbortController,
@@ -42,6 +43,10 @@ const Id = (props: Props) => {
   //   return <div></div>
   // }
 
+  const categories = props.content.category.map((cg: string, i: number) =>
+    <Link key={i} to={`/category/${cg}`}><CategoryButton>{props.categoryList[cg]}</CategoryButton></Link>
+  )
+
   return (
     <Wrapper key={props.id} onClick={() => props.hideId()}>
       <ContentBox>
@@ -51,9 +56,7 @@ const Id = (props: Props) => {
         <Way>応募方法: {props.content.way}</Way>
         <Limit>{props.countdown}</Limit>
         <Provider>企画: {props.content.provider}</Provider>
-        <Category>カテゴリ: {props.content.category.map((cg: string, i: number) =>
-          <Link key={i} to={`/category/${cg}`}><CategoryButton>{cg}</CategoryButton></Link>
-        )}</Category>
+        <Category>カテゴリ: {categories}</Category>
         <Button>応募する！<ExLink href={props.content.link} /></Button>
       </ContentBox>
     </Wrapper>
