@@ -4,37 +4,59 @@ import styled from 'styled-components'
 import media from '../../MediaQuery'
 
 interface Props {
-  layout: any
-  content: any
-  onClick: (id: number) => void
+  content: {
+    'ad_image': string
+    'ad_link': string
+    'ad_name': string
+    'ad_number': string
+    'ad_tracking': string
+    contents: [
+      {
+        'id': number,
+        'name': string,
+        'winner': number,
+        'image_url': string,
+        'image_bin': string,
+        'created_at': string,
+        'updated_at': string,
+        'limit_date': string,
+        'link': string,
+        'provider': string,
+        'way': string,
+        'category': string[]
+      }
+    ]
+    endpoint: string
+    heading: string
+    no: number
+    renderType: string
+  }
+  showId: (id: number) => void
 }
 
-const HorizontalScroll = (props: Props) => {
-  let layout = props.layout
-  let content = props.content.contents
+const HorizontalScroll = ({ content, content: {contents}, showId }: Props) => {
   let items = []
-  const adNumber = layout.ad_number
-  for (let i in content) {
-    if (i === adNumber) {
+  for (let i in contents) {
+    if (i === content.ad_number) {
       items.push(
         <OuterTile key={'AD' + i}>
           <Tile>
-            <NLink href={layout.ad_link} target="_blank" rel="nofollow" />
-            <AdImg alt={layout.ad_name} src={layout.ad_image} />
-            <img width="1" height="1" src={layout.ad_tracking} alt="" />
+            <NLink href={content.ad_link} target="_blank" rel="nofollow" />
+            <AdImg alt={content.ad_name} src={content.ad_image} />
+            <img width="1" height="1" src={content.ad_tracking} alt="" />
           </Tile>
-          <Name key={'Name' + i}>{layout.ad_name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'}</Name>
+          <Name key={'Name' + i}>{content.ad_name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'}</Name>
         </OuterTile>
       )
     }
     // safariでNameの表示が崩れるのを防ぐ
-    const name = content[i].name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'
+    const name = contents[i].name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'
     items.push(
       <OuterTile key={i}>
         <Tile>
-          <NLink onClick={() => props.onClick(content[i].id)} />
-          <Img alt={content[i].name} src={content[i].image_url} />
-          <a href={content[i].link} />
+          <NLink onClick={() => showId(contents[i].id)} />
+          <Img alt={contents[i].name} src={contents[i].image_url} />
+          <a href={contents[i].link} />
         </Tile>
         <Name>{name}</Name>
       </OuterTile>
@@ -43,7 +65,7 @@ const HorizontalScroll = (props: Props) => {
   /*
   items.push(
     <OuterTile key={1000}>
-      <Link to={`/${layout.endpoint}`}>
+      <Link to={`/${content.endpoint}`}>
         <Tile>
           <MoreText>もっとみる</MoreText>
         </Tile>
@@ -54,7 +76,7 @@ const HorizontalScroll = (props: Props) => {
   */
   return (
     <div>
-      <Heading>{layout.heading}</Heading>
+      <Heading>{content.heading}</Heading>
       <HorizontalSchrollBox>
         {items}
       </HorizontalSchrollBox>

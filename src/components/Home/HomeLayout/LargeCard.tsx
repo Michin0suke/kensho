@@ -11,11 +11,11 @@ interface Props {
   }
 }
 
-const LargeCard = (props: Props) => (
-  <Link to={props.content.link}>
-    <Tile style={{ backgroundImage: `url(${props.content.image_url})` }}>
+const LargeCard = ({ content }: Props) => (
+  <Link to={content.link}>
+    <Tile style={{ backgroundImage: `url(${content.image_url})` }}>
       <Gradation />
-      <Heading>{props.content.heading}</Heading>
+      <Heading>{content.heading}</Heading>
     </Tile>
   </Link>
 )

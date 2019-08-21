@@ -1,105 +1,67 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
 import CountDown from './CountDown'
 
-interface IdProps {
-  contents: {
-    'id': number,
-    'name': string,
-    'winner': number,
-    'image_url': string,
-    'limit_date': Date,
-    'link': string,
-    'provider': string,
-    'way': string,
-    'category': string[]
-  }
-  onClick: (id?: number) => void
+interface Props {
+  hideId: () => null
+  /* showId: (id: number) => null */
+  fetchCategoryList: () => null
+  setCountdown: (countdown: Date) => null
+  showId: number,
+  isShow: boolean,
+  content: any,
+  categories: any,
+  id: number,
+  controller1: AbortController,
+  controller2: AbortController,
+  countdown: string
 }
 
-export default class Id extends React.Component<IdProps> {
-  public state: { contents: never[]; countDown: string;};
-  public constructor (props: IdProps) {
-    super(props)
-    this.state = {
-      contents: [],
-      countDown: ''
-    }
-  }
-
-  public controller1 = new AbortController()
-  public controller2 = new AbortController()
-
-  public componentDidMount () {
-    // const id = this.props.match.params.id
-    const id = this.props.contents.id
-    console.log(`https://api.prizz.jp/search/${id}`)
-
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: this.controller1.signal })
-      .then(responce => responce.json())
-      .then(json => {
-        const contents = JSON.parse(JSON.stringify(json)).contents
-        this.setState({ contents: contents })
-      })
-      .catch(ex => console.log('parsing failed', ex))
-
-    fetch('https://prizz.jp/categoryList.json', { signal: this.controller2.signal })
-      .then(responce => responce.json())
-      .then(json => {
-        const categoryList = JSON.parse(JSON.stringify(json))
-        this.setState({ categoryList: categoryList })
-      })
-
-    const limit = new Date(this.props.contents.limit_date)
-    this.setState({ countDown: CountDown(limit) })
-    setInterval(() => this.setState({ countDown: CountDown(limit) }), 1000)
-  }
-
-  // アンマウント時に実行中のfetchを中断
-  public componentWillUnmount () {
-    this.controller1.abort()
-    this.controller2.abort()
-  }
-
-  public render = () => {
-    const c: IdProps['contents'] = this.props.contents
-    const l = new Date(c.limit_date)
-    const month = l.getMonth() + 1 + '月'
-    let date: string
-    let hours: string
-    if (l.getHours() - 9 === 0) {
-      date = l.getDate() + '日'
-      hours = ''
-    } else {
-      if (l.getHours() >= 9) {
-        date = l.getDate().toString() + '日'
-        hours = ' ' + (l.getHours() - 9).toString() + '時'
-      } else {
-        date = (l.getDate() - 1).toString() + '日'
-        hours = ' ' + (l.getHours() - 9 + 24).toString() + '時'
-      }
-    }
-
-    return (
-      <Wrapper onClick={() => this.props.onClick()}>
-        <ContentBox>
-          <Image style={{ backgroundImage: `url(${c.image_url})` }} />
-          <Name>{c.name}</Name>
-          <Winner>当選人数: {c.winner}人</Winner>
-          <Way>応募方法: {c.way}</Way>
-          <Limit>締め切り: {month}{date}{hours}（あと {this.state.countDown}）</Limit>
-          <Provider>企画: {c.provider}</Provider>
-          <Category>カテゴリ: {c.category.map((cg, i) =>
-            <Link key={i} to={`/category/${cg}`}><CategoryButton>{cg}</CategoryButton></Link>
-          )}</Category>
-          <Button>応募する！<ExLink href={c.link} /></Button>
-        </ContentBox>
-      </Wrapper>
-    )
-  }
+interface State {
+  categoryList: {}
+  countDown: string
 }
+
+const Id = (props: Props) => {
+  let countdown: number
+
+  useEffect((): any => {
+    // タイムラグをなくすためにsetIntervalなしも必要
+    props.setCountdown(new Date(props.content.limit_date))
+    countdown = setInterval(() => props.setCountdown(new Date(props.content.limit_date)), 1000)
+  }, [])
+
+  useEffect(() => () => {
+    clearInterval(countdown)
+    props.controller1.abort()
+    props.controller2.abort()
+  }, [])
+
+  // if (!props.isShow) {
+  //   return <div></div>
+  // }
+
+  return (
+    <Wrapper key={props.id} onClick={() => props.hideId()}>
+      <ContentBox>
+        <Image style={{ backgroundImage: `url(${props.content.image_url})` }} />
+        <Name>{props.content.name}</Name>
+        <Winner>当選人数: {props.content.winner}人</Winner>
+        <Way>応募方法: {props.content.way}</Way>
+        <Limit>{props.countdown}</Limit>
+        <Provider>企画: {props.content.provider}</Provider>
+        <Category>カテゴリ: {props.content.category.map((cg: string, i: number) =>
+          <Link key={i} to={`/category/${cg}`}><CategoryButton>{cg}</CategoryButton></Link>
+        )}</Category>
+        <Button>応募する！<ExLink href={props.content.link} /></Button>
+      </ContentBox>
+    </Wrapper>
+  )
+}
+
+export default Id
 
 const Wrapper = styled.div`
   top: 0;

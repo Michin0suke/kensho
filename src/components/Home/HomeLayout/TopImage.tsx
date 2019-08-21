@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import media from '../../MediaQuery'
 
 interface Props {
-  layout: any
   content: any
 }
 
@@ -16,14 +15,13 @@ const prizzSvg =
     <rect x="61.96" y="21.13" width="5.33" height="41.07"/>
   </g>
 
-const TopImage = (props: Props) => {
-  const layout = props.layout
+const TopImage = ({ content }: {content: any}) => {
   return (
     <Frame>
       <Background />
       <PrizzLogo xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.73 62.2">{prizzSvg}</PrizzLogo>
-      <Image style={{ backgroundImage: `url(${layout.image_url})` }}/>
-      <Heading>{layout.heading}</Heading>
+      <Image style={{ backgroundImage: `url(${content.image_url})` }}/>
+      <Heading>{content.heading}</Heading>
       <TopLogo xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.73 62.2">{prizzSvg}</TopLogo>
     </Frame>
   )
