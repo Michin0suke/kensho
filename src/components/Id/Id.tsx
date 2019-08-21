@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
-import CountDown from './CountDown'
 
 interface Props {
   hideId: () => null
@@ -143,8 +142,7 @@ const CategoryButton = styled.p`
   background-color: #FF7EAA;
   color: white;
   border-radius: 3px;
-  margin: 0;
-  margin-left: 7px;
+  margin: 2px 0px 2px 7px;
 `
 const Button = styled.div`
   position: relative;

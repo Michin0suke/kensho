@@ -34,7 +34,7 @@ interface Props {
   showId: (id: number) => void
 }
 
-const HorizontalScroll = ({ content, content: {contents}, showId }: Props) => {
+const HorizontalScroll = ({ content, content: { contents }, showId }: Props) => {
   let items = []
   for (let i in contents) {
     if (i === content.ad_number) {
