@@ -44,7 +44,9 @@ const Id = (props: Props) => {
   // }
 
   const categories = props.content.category.map((cg: string, i: number) =>
-    <Link key={i} to={`/category/${cg}`}><CategoryButton>{props.categoryList[cg]}</CategoryButton></Link>
+    <CategoryButton key={i} href={`/category/${cg}`} onClick={() => {
+      props.hideId()
+    }}>{props.categoryList[cg]}</CategoryButton>
   )
 
   return (
@@ -139,13 +141,14 @@ const Provider = styled.p`
 const Category = styled.div`
   font-size: 16px;
 `
-const CategoryButton = styled.p`
+const CategoryButton = styled.a`
   display: inline-block;
   padding: 4px 7px;
   background-color: #FF7EAA;
   color: white;
   border-radius: 3px;
   margin: 2px 0px 2px 7px;
+  text-decoration: none;
 `
 const Button = styled.div`
   position: relative;
