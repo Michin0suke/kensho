@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 
 interface Props {
   categoryList: { [key: string]: string }
-  layout: any
+  content: any
 }
 
 const CategoryList = (props: Props) => {
   let contents = props.categoryList
-  let layout = props.layout
+  let content = props.content
   let items: any = []
   Object.keys(contents).forEach((key, i) => {
     items.push(
@@ -27,7 +27,7 @@ const CategoryList = (props: Props) => {
   })
   return (
     <div>
-      <Heading>{layout.heading}</Heading>
+      <Heading>{content.heading}</Heading>
       <HorizontalSchrollBox>
         {items}
       </HorizontalSchrollBox>

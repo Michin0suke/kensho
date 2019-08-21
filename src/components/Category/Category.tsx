@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import CategoryContent from './CategoryContent'
 import media from '../MediaQuery'
-import { Link, RouteComponentProps } from 'react-router-dom'
-import Id from '../Id/Id'
+import { Link } from 'react-router-dom'
+import Id from '../../containers/connectId'
 
 interface CategoryRouterProps {
   category: any
@@ -16,34 +16,30 @@ interface State {
   categoryList: []
 }
 
-export default class Category extends React.Component<RouteComponentProps<CategoryRouterProps>, State> {
-  public constructor (props: RouteComponentProps<CategoryRouterProps>) {
-    super(props)
-    this.state = {
-      contents: [],
-      isId: 0,
-      categoryList: []
-    }
-  }
+interface Props {
+  match: { params: { category: string }}
+  categoryList: {[key: string]: string}
+  contents: {[key: string]: []}
+  selectedId: number
+  isShow: boolean
+  showId: (id: number) => null
+  fetchCategoryContents: (category: string, offset?: number) => null
+  fetchCategoryList: (categoryList: {}) => null
+}
 
-  public componentDidMount () {
-    const category = this.props.match.params.category
-    const limit = 12
-
-    fetch(`https://api.prizz.jp/category/${category}?limit=${limit}`)
-      .then(responce => responce.json())
-      .then(json => {
-        const contents = JSON.parse(JSON.stringify(json)).contents
-        this.setState({ contents: contents })
-      })
-      .catch(ex => console.log('parsing failed', ex))
-
-    fetch('https://prizz.jp/categoryList.json')
-      .then(responce => responce.json())
-      .then(json => {
-        const categoryList = JSON.parse(JSON.stringify(json))
-        this.setState({ categoryList: categoryList })
-      })
+const Category = ({
+  match: { params: { category } },
+  categoryList,
+  contents,
+  selectedId,
+  isShow,
+  showId,
+  fetchCategoryContents,
+  fetchCategoryList
+}: Props) => {
+  useEffect(() => {
+    fetchCategoryContents(category)
+    fetchCategoryList(categoryList)
 
     // iOSのSafariでInfiniteScrollのバグを回避
     const scriptTag = document.querySelector('script')
@@ -54,9 +50,9 @@ export default class Category extends React.Component<RouteComponentProps<Catego
     if (scriptTag) {
       scriptTag.after(script)
     }
-  }
+  }, [])
 
-  public prizzSvg = (
+  const prizzSvg = (
     <g id="prizz" data-name="prizz">
       <path d="M61.08,11.34a3.55,3.55,0,1,1,7.1,0,3.55,3.55,0,1,1-7.1,0Z" />
       <path d="M54.81,26.37l2.64-4.8a17.21,17.21,0,0,0-3.82-.44c-9.61,0-17.41,3.75-17.41,23.46V62.2H41.4V44.59c0-16,5.47-18.28,12.23-18.28A11.51,11.51,0,0,1,54.81,26.37Z" />
@@ -66,80 +62,48 @@ export default class Category extends React.Component<RouteComponentProps<Catego
     </g>
   )
 
-  public fetchMoreData = () => {
-    const category = this.props.match.params.category
-    const offset = this.state.contents.length
-    const limit = 4
-    fetch(`https://api.prizz.jp/category/${category}?limit=${offset},${limit}`)
-      .then(responce => responce.json())
-      .then(json => {
-        const nowContents = this.state.contents.slice()
-        const fetchedContents = JSON.parse(JSON.stringify(json)).contents
-        this.setState({ contents: nowContents.concat(fetchedContents) })
-      })
-  }
-
-  public onClickId = (id: number | undefined) => {
-    if (id !== undefined) {
-      this.setState({ isId: id })
-    } else {
-      // setTimeout(() => this.setState({ isId: 0 }), 300)
-      this.setState({ isId: 0 })
+  interface CategoryContents {
+    content: {
+      'image_url': string,
+      'id': number,
+      'name': string
     }
   }
 
-  public render = () => {
-    let header: string = this.props.match.params.category
-    if (this.state.categoryList) {
-      header = this.state.categoryList[this.props.match.params.category]
-    }
-    let id = []
-    if (this.state.isId !== 0) {
-      let contents = this.state.contents
-        .filter(c => c.id === this.state.isId)
-        .filter(c => c !== undefined)[0]
-      if (contents !== undefined) {
-        id.push(
-          <Id
-            key={this.state.isId}
-            contents={contents}
-            onClick={this.onClickId}
-          />
-        )
-      } else {
-        console.log(`contents in Category.js : ${contents}`)
-      }
-    }
-    return (
-      <Wrapper>
-        <Header>{header}</Header>
-        <Link to="/">
-          <PrizzLogo
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 112.73 62.2"
-          >
-            {this.prizzSvg}
-          </PrizzLogo>
-        </Link>
-        <Margin />
-        <InfiniteScroll
-          dataLength={this.state.contents.length}
-          next={this.fetchMoreData}
-          hasMore={true}
-          loader={''}
+  const header = categoryList ? categoryList[category] : ''
+  const data = contents[category] || []
+  const id = isShow ? <Id key={-1} content={data[selectedId]} /> : <div></div>
+  const categoryLength = contents[category] ? contents[category].length : 0
+
+  return (
+    <Wrapper>
+      {id}
+      <Header>{`${header} (${data.length})`}</Header>
+      <Link to="/">
+        <PrizzLogo
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 112.73 62.2"
         >
-          {this.state.contents.map((elem, index) => (
-            <CategoryContent
-              key={index}
-              content={elem}
-              onClick={this.onClickId}
-            />
-          ))}
-        </InfiniteScroll>
-        {id}
-      </Wrapper>
-    )
-  }
+          {prizzSvg}
+        </PrizzLogo>
+      </Link>
+      <Margin />
+      <InfiniteScroll
+        dataLength={data.length}
+        next={() => fetchCategoryContents(category, categoryLength)}
+        hasMore={true}
+        loader={''}
+      >
+        {data.map((elem, index) => (
+          <CategoryContent
+            key={index}
+            content={elem}
+            showId={showId}
+          />
+        ))}
+      </InfiniteScroll>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`
@@ -199,3 +163,5 @@ const ContentsBox = styled.div`
   height: auto;
 `
 */
+
+export default Category

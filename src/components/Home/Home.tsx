@@ -1,121 +1,99 @@
-import React from 'react'
-import styled from 'styled-components'
-import HomeLayout from './HomeLayout/HomeLayout'
-import Id from '../Id/Id'
+import React, { useEffect } from 'react'
+import Id from '../../containers/connectId'
+import HomeLayout from '../../containers/connectHomeLayout'
+import { showId } from '../../module/id';
 
+interface Layouts {
+  'no': number,
+  'renderType': string,
+  'heading': string,
+  'image_url': string,
+  'endpoint': string,
+  'ad_link'?: string,
+  'ad_image'?: string,
+  'ad_tracking'?: string,
+  'ad_name'?: string,
+  'ad_number'?: number
+}
+
+interface InContents {
+  'id': number,
+  'name': string,
+  'winner': number,
+  'image_url': string,
+  'image_bin': string,
+  'created_at': string,
+  'updated_at': string,
+  'limit_date': string,
+  'link': string,
+  'provider': string,
+  'way': string,
+  'category': string[]
+}
+interface Contents {
+  'contents'?: InContents[],
+  'no': number,
+  'renderType': string,
+  'heading'?: string,
+  'image_url'?: string,
+  'link'?: string
+}
 interface State {
-  countOfContents: number,
-  layoutsLength: number,
-  isId: number,
-  layouts: any[],
-  contents: any[],
-  categoryList: { [key: string]: string }
+  'layouts': Layouts[],
+  'contents': Contents[],
+  'categoryList': { [key: string]: string }
 }
 
-export default class Home extends React.Component<{}, State> {
-  public constructor (props: {}) {
-    super(props)
-    this.state = {
-      countOfContents: 3,
-      layoutsLength: 3,
-      isId: 0,
-      layouts: [],
-      contents: [],
-      categoryList: {}
-    }
+// Idのため
+interface IdContents {
+  'contents': InContents[],
+  'no': number,
+  'renderType': string,
+  'heading'?: string,
+}
+
+interface Props {
+  routerId?: number,
+  showId: (id?: number) => null,
+  fetchHomeLayout: () => null,
+  fetchCategoryList: () => null,
+  setHomeContents: (layout: any) => null,
+  id: {
+    isShow: boolean,
+    showedId: number,
+    content: {}
+  },
+  contents: [],
+  layout: [],
+  categoryList: {}
+}
+
+const Home = (props: Props) => {
+  useEffect(() => {
+    if (props.routerId) props.showId(props.routerId)
+  }, [])
+
+  if (JSON.stringify(props.categoryList) === '{}') props.fetchCategoryList()
+  if (props.layout.length === 0) props.fetchHomeLayout()
+
+  let renderContents: any[] = []
+
+  if (props.id.isShow) {
+    renderContents.push(<Id key={-1} content={props.contents[props.id.showedId]} />)
   }
 
-  public componentDidMount () {
-    fetch('https://prizz.jp/homeLayout.json')
-      .then(responce => responce.json())
-      .then(json => {
-        let layouts = JSON.parse(JSON.stringify(json)).contents
-        this.setState({ layouts: layouts })
-        return layouts
-      })
-      .then(layouts => {
-        for (let i in layouts) {
-          if ('endpoint' in layouts[i]) {
-            fetch(`https://api.prizz.jp/${layouts[i].endpoint}`)
-              .then(response => response.json())
-              .then(json => {
-                let pairContent = JSON.parse(JSON.stringify(json))
-                pairContent.no = layouts[i].no
-                let contents = this.state.contents.slice()
-                this.setState({ contents: contents.concat(pairContent) })
-              })
-          } else {
-            let contents = this.state.contents.slice()
-            this.setState({ contents: contents.concat(layouts[i]) })
-          }
-        }
-      })
-      .catch(ex => console.log('parsing failed', ex))
-
-    fetch('https://prizz.jp/categoryList.json')
-      .then(responce => responce.json())
-      .then(json => {
-        const categoryList = JSON.parse(JSON.stringify(json))
-        this.setState({ categoryList: categoryList })
-      })
-  }
-
-  public fetchMoreData = () => {
-    const layouts = this.state.layouts.slice()
-    this.setState({
-      layouts: layouts.concat(layouts)
-    })
-  }
-
-  public onClickId = (id: number) => {
-    if (id !== undefined) {
-      this.setState({ isId: id })
-    } else {
-      // setTimeout(() => this.setState({ isId: 0 }), 300)
-      this.setState({ isId: 0 })
-    }
-  }
-
-  public render = () => {
-    let renderContents = []
-    // stateがcontentsとlayoutの両方反映されているときのみ実行する。
-    if (this.state.layouts.length === this.state.contents.length && this.state.contents.length !== 0) {
-      this.state.layouts.forEach((layout, index) => {
-        let pairContent = this.state.contents.find(content => {
-          return content.no === layout.no
-        })
-        renderContents.push(
-          <HomeLayout
-            key={index}
-            layout={layout}
-            content={pairContent}
-            categoryList={this.state.categoryList}
-            onClick={this.onClickId}
-          />)
-      })
-      if (this.state.isId !== 0) {
-        let contents = this.state.contents
-          .filter(c => c.contents)
-          .map(c => c.contents)
-          .map(c =>
-            c.filter((s: any) => s.id === this.state.isId)[0]
-          )
-          .filter(c => c !== undefined)[0]
-        if (contents !== undefined) {
-          renderContents.push(<Id key={this.state.isId} contents={contents} onClick={this.onClickId} />)
-        } else {
-          console.log(`contents in Home.js : ${contents}`)
-        }
-      }
-    }
-    return (
-      <Wrapper>
-        {renderContents}
-      </Wrapper>
+  props.layout.forEach((layout: any, index: number) => {
+    renderContents.push(
+      <HomeLayout
+        key={index}
+        layout={layout}
+      />
     )
-  }
+  })
+  return (
+    <div>
+      {renderContents}
+    </div>
+  )
 }
-const Wrapper = styled.div`
-  margin: 0;
-  padding: 0;
-`
+export default Home

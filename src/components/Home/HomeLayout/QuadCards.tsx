@@ -4,36 +4,33 @@ import styled from 'styled-components'
 import media from '../../MediaQuery'
 
 interface Props {
-  layout: any
   content: any
-  onClick: (id: number) => void
+  showId: (id: number) => void
 }
 
-const QuadCards = (props: Props) => {
-  const layout = props.layout
-  const contents = props.content.contents
+const QuadCards = ({ content, showId }: Props) => {
   const items = []
-  for (let i in contents) {
+  for (let i in content) {
     items.push(
       <OuterTile key={i}>
-        <Tile key={i} style={{ backgroundImage: `url(${contents[i].image_url})` }}>
-          <Link key={i} onClick={() => props.onClick(contents[i].id)} />
+        <Tile key={i} style={{ backgroundImage: `url(${content[i].image_url})` }}>
+          <Link key={i} onClick={() => showId(content[i].id)} />
         </Tile>
-        <Name key={'Name' + i}>{contents[i].name}</Name>
+        <Name key={'Name' + i}>{content[i].name}</Name>
       </OuterTile>
     )
   }
   return (
-    <ContentsBox>
-      <Heading>{layout.heading}</Heading>
+    <ContentBox>
+      <Heading>{content.heading}</Heading>
       <QuadBox>
         {items}
       </QuadBox>
-    </ContentsBox>
+    </ContentBox>
   )
 }
 
-const ContentsBox = styled.div`
+const ContentBox = styled.div`
   position: relative;
   margin: 30px 10px;
 `

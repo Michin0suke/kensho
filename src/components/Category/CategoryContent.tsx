@@ -8,17 +8,21 @@ interface Props {
     'id': number
     'name': string
   }
-  onClick: (id: number) => void
+  showId: (id: number) => void
 }
 
-const CategoryContent = (props: Props) => (
-  <OuterTile>
-    <Tile style={{ backgroundImage: `url(${props.content.image_url})` }}>
-      <Link onClick={() => props.onClick(props.content.id)} />
-    </Tile>
-    <Name>{props.content.name}</Name>
-  </OuterTile>
-)
+const CategoryContent = ({ content, showId }: Props) => {
+  const imageUrl = content.image_url
+  const { id, name } = content
+  return (
+    <OuterTile>
+      <Tile style={{ backgroundImage: `url(${imageUrl})` }}>
+        <Link onClick={() => showId(id)} />
+      </Tile>
+      <Name>{name}</Name>
+    </OuterTile>
+  )
+}
 
 const OuterTile = styled.div`
   width: 43%;

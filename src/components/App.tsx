@@ -1,15 +1,19 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Home from './Home/Home'
-import Category from './Category/Category'
-import Id from './Id/Id'
+import { ConnectedRouter } from 'connected-react-router'
+import H from 'history'
+import Home from '../containers/connectHome'
+import Category from '../containers/connectCategory'
 
-const App = () => (
-  <Router>
-    <Route exact path='/' component={Home} />
-    <Route path='/category/:category' component={Category} />
-    <Route path='/id/:id' component={Id} />
-  </Router>
+const App = ({ history }: { history: H.History }) => (
+  <ConnectedRouter history={history}>
+    <Router>
+      <Route exact path='/' component={Home} />
+      <Route path='/id/:id' render={(props) => <Home routerId={props.match.params.id} />} />
+      <Route path='/category/:category' component={Category} />
+    </Router>
+  </ConnectedRouter>
 )
+// <Route path='/category/:category' component={Category} />
 
 export default App
