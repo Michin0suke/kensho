@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 
   fetchCategoryContents: (c: string, offset = 0) => {
-    const limit = 16
+    const limit = 18
     fetch(`https://api.prizz.jp/category/${c}?limit=${offset},${limit}`)
       .then(responce => responce.json())
       .then(json => {
@@ -56,6 +56,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         .then(responce => responce.json())
         .then(json => {
           const categoryList = JSON.parse(JSON.stringify(json))
+          console.log(categoryList)
           dispatch(setCategoryList(categoryList))
         })
     }

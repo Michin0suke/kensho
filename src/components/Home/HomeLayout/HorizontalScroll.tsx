@@ -45,7 +45,8 @@ const HorizontalScroll = ({ content, content: { contents }, showId }: Props) => 
             <AdImg alt={content.ad_name} src={content.ad_image} />
             <img width="1" height="1" src={content.ad_tracking} alt="" />
           </Tile>
-          <Name key={'Name' + i}>{content.ad_name + '\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'}</Name>
+          <NameGhost/>
+          <Name>{content.ad_name}</Name>
         </OuterTile>
       )
     }
@@ -58,6 +59,7 @@ const HorizontalScroll = ({ content, content: { contents }, showId }: Props) => 
           <Img alt={contents[i].name} src={contents[i].image_url} />
           <a href={contents[i].link} />
         </Tile>
+        <NameGhost/>
         <Name>{name}</Name>
       </OuterTile>
     )
@@ -86,8 +88,8 @@ const HorizontalScroll = ({ content, content: { contents }, showId }: Props) => 
 
 const Heading = styled.h1`
   display: inline-block;
-  font-size: 24px;
-  color: dimgray;
+  font-size: 1.125rem;
+  color: #333;
   margin: 0px 20px;
 `
 const HorizontalSchrollBox = styled.ul`
@@ -95,9 +97,9 @@ const HorizontalSchrollBox = styled.ul`
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-  border-top: 2px solid #DDD;
-  border-bottom: 2px solid #DDD;
-  padding: 10px 0;
+  /*border-top: 2px solid #DDD;
+  border-bottom: 2px solid #DDD;*/
+  padding: 0 0 0 6px;
   margin: 0;
   box-sizing: border-box;
   &::-webkit-scrollbar {
@@ -107,12 +109,11 @@ const HorizontalSchrollBox = styled.ul`
 const OuterTile = styled.li`
   display: inline-block;
   position: relative;
-  width: 40vw;
+  width: 100px;
   ${media.greaterThan('medium')`
     width: 14vw;
   `}
-  height: auto;
-  margin: 10px;
+  margin: 7px;
 `
 const Tile = styled.article`
   /* 広告用 */
@@ -124,30 +125,49 @@ const Tile = styled.article`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  background-color: #FBFA8A;
   position: relative;
   text-align: center;
   width: 100%;
-  height: 40vw;
+  height: 100px;
   ${media.greaterThan('medium')`
     height: 14vw;
   `}
   margin: 0;
   color: white;
-  border: solid 3px #DDD;
-  border-radius: 10px;
+  border: solid 1px #DDD;
+  border-radius: 3px;
   overflow: hidden;
 `
 const Name = styled.p`
   display: block;
-  font-size: 16px;
-  line-height: 26px;
-  color: dimgray;
+  position: absolute;
+  top: 100px;
+  font-size: 11px;
+  line-height: 16px;
+  color: #333;
   text-align: center;
   width: 100%;
   height: 48px;
   white-space: normal;
   overflow: hidden;
   padding-left: 3px;
+  margin-top: 5px;
+`
+const NameGhost = styled.div`
+  display: block;
+  position: relative;
+  font-size: 11px;
+  line-height: 16px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  height: 48px;
+  white-space: normal;
+  overflow: hidden;
+  padding-left: 3px;
+  margin-top: 5px;
+  color: transparent;
 `
 /*
 text-overflow: ellipsis;

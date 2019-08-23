@@ -30,9 +30,9 @@
   },
   {
     "no": 3,
-    "renderType": "quadCards",
+    "renderType": "threeCards",
     "heading": "旅行に行こう",
-    "endpoint": "category/travel?limit=4"
+    "endpoint": "category/travel?limit=9"
   },
   {
     "no": 4,
@@ -43,11 +43,11 @@
     "ad_image": "https://www25.a8.net/svt/bgt?aid=190218636458&wid=003&eno=01&mid=s00000017030001009000&mc=1",
     "ad_tracking": "https://www11.a8.net/0.gif?a8mat=3591N0+7KOLDU+3NEK+609HT",
     "ad_name": "【AD】Android限定！モニター募集中！",
-    "ad_number": "7"
+    "ad_number": "1000"
   },
   {
     "no": 5,
-    "renderType": "quadCards",
+    "renderType": "threeCards",
     "heading": "最新ゲームを手に入れよう！",
     "endpoint": "category/toy?limit=8"
   },
@@ -77,7 +77,7 @@
   },
   {
     "no": 9,
-    "renderType": "quadCards",
+    "renderType": "threeCards",
     "heading": "服を当てよう！",
     "endpoint": "category/fashion?limit=8"
   },
@@ -96,7 +96,7 @@
     "no": 11,
     "renderType": "quadCards",
     "heading": "日用品を当てよう！",
-    "endpoint": "category/daily?limit=8"
+    "endpoint": "category/daily?limit=4"
   },
   {
     "no": 12,

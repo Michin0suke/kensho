@@ -23,9 +23,9 @@ const QuadCards = ({ content, content: { contents }, showId }: Props) => {
   return (
     <ContentBox>
       <Heading>{content.heading}</Heading>
-      <QuadBox>
+      <ThreeBox>
         {items}
-      </QuadBox>
+      </ThreeBox>
     </ContentBox>
   )
 }
@@ -39,7 +39,7 @@ const Heading = styled.h1`
   color: #333;
   margin: 0px 13px;
 `
-const QuadBox = styled.div`
+const ThreeBox = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -48,7 +48,7 @@ const QuadBox = styled.div`
 `
 const OuterTile = styled.div`
   position: relative;
-  width: 47%;
+  width: 30%;
   ${media.greaterThan('medium')`
     width: 23%;
   `}
@@ -57,7 +57,7 @@ const OuterTile = styled.div`
 const Tile = styled.div`
   position: relative;
   width: 100%;
-  height: 40vw;
+  height: 28vw;
   ${media.greaterThan('medium')`
     height: 22vw;
   `}

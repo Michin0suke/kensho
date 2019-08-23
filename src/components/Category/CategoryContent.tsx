@@ -25,9 +25,8 @@ const CategoryContent = ({ content, showId }: Props) => {
 }
 
 const OuterTile = styled.div`
-  width: 43%;
-  height: 50vw;
-  margin: 5vw 3vw;
+  width: 30%;
+  margin: 2vw 1.5%;
   ${media.greaterThan('medium')`
     width: 21%;
     height: 25vw;
@@ -39,7 +38,7 @@ const OuterTile = styled.div`
 const Tile = styled.div`
   position: relative;
   width: 100%;
-  height: 42vw;
+  height: 30vw;
   ${media.greaterThan('medium')`
     height: 22vw;
   `}
@@ -47,17 +46,18 @@ const Tile = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  border: solid 3px #DDD;
-  border-radius: 10px;
+  border: solid 1px #DDD;
+  border-radius: 3px;
   overflow: hidden;
 `
 const Name = styled.div`
   display: inline-block;
-  font-size: 16px;
-  color: dimgray;
+  font-size: 11px;
+  color: #333;
   text-align: center;
   width: 100%;
-  margin-top: 5px;
+  height: 30px;
+  margin-top: 3px;
 `
 const Link = styled.a`
   position: absolute;

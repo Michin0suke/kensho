@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 export const setCategoryList = (categoryList: {}) => ({
   type: 'SET_CATEGORY_LIST',
   categoryList
@@ -17,4 +19,5 @@ const categoryList = (state = initialState, { type, categoryList }: Action) => {
   }
 }
 
+// export default combineReducers({ categoryList })
 export default categoryList

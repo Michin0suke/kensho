@@ -5,6 +5,7 @@ import home from './home'
 import id from './id'
 import categoryList from './categoryList'
 import category from './category'
+import twitter from './twitter'
 
 export default (history: H.History) => combineReducers(
   {
@@ -12,6 +13,7 @@ export default (history: H.History) => combineReducers(
     home,
     id,
     categoryList,
-    category
+    category,
+    twitter
   }
 )

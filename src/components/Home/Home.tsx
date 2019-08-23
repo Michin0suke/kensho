@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Id from '../../containers/connectId'
 import HomeLayout from '../../containers/connectHomeLayout'
-import { showId } from '../../module/id';
+import styled from 'styled-components'
 
 interface Layouts {
   'no': number,
@@ -91,9 +91,14 @@ const Home = (props: Props) => {
     )
   })
   return (
-    <div>
+    <Wrapper>
       {renderContents}
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  background-color: #eee;
+`
+
 export default Home

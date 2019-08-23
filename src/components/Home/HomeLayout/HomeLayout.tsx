@@ -4,6 +4,7 @@ import TopImage from './TopImage'
 import HorizontalScroll from './HorizontalScroll'
 import LargeCard from './LargeCard'
 import QuadCards from './QuadCards'
+import ThreeCards from './ThreeCards'
 
 interface Props {
   contents: any
@@ -32,7 +33,9 @@ const HomeLayout = ({ contents, categoryList, showId, setHomeContents, layout }:
       case 'largeCard':
         return <LargeCard content={content}/>
       case 'quadCards':
-        return <QuadCards content={content.contents} showId={showId}/>
+        return <QuadCards content={content} showId={showId}/>
+      case 'threeCards':
+        return <ThreeCards content={content} showId={showId}/>
       default:
         return <div>unknown renderType :{content.renderType}</div>
     }

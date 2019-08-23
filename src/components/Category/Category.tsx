@@ -111,6 +111,7 @@ const Wrapper = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #eee;
 `
 const Header = styled.h1`
   font-size: 6vw;
@@ -129,9 +130,9 @@ const Header = styled.h1`
   display: inline-block;
   width: 100%;
   text-align: center;
-  color: #e7c296;
-  border-bottom: solid 3px #e7c296;
-  background-color: #29344b;
+  color: #333;
+  border-bottom: solid 3px #333;
+  background-color: #FFDD00;
   z-index: 10;
 `
 const PrizzLogo = styled.svg`
@@ -144,7 +145,7 @@ const PrizzLogo = styled.svg`
     left: 1.5vw;
   `}
   position: fixed;
-  fill: #e7c296;
+  fill: #333;
   z-index: 20;
 `
 const Margin = styled.div`

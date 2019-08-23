@@ -23,16 +23,16 @@ const LargeCard = ({ content }: Props) => (
 const Tile = styled.div`
   position: relative;
   width: 85vw;
-  height: calc(85vw / 1.6);
+  height: calc(85vw / 2.4);
   ${media.greaterThan('medium')`
     height: calc(85vw/3)
   `}
-  margin: 30px auto;
+  margin: 15px auto;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  border: solid 3px #ddd;
-  border-radius: 10px;
+  border: solid 1px #ddd;
+  border-radius: 5px;
   overflow: hidden;
 `
 const Heading = styled.h1`

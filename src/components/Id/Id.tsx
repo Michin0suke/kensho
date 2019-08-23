@@ -143,9 +143,10 @@ const Category = styled.div`
 `
 const CategoryButton = styled.a`
   display: inline-block;
-  padding: 4px 7px;
+  padding: 5px 5px 4px;
   background-color: #FF7EAA;
   color: white;
+  font-size: 13px;
   border-radius: 3px;
   margin: 2px 0px 2px 7px;
   text-decoration: none;
@@ -158,9 +159,10 @@ const Button = styled.div`
   margin-top: 20px;
   padding-top: 10px;
   font-size: 20px;
-  color: white;
+  font-weight: bold;
+  color: #333;
   text-align: center;
-  background-color: #29344B;
+  background-color: #FFDD00;
   border-radius: 10px;
 `
 const ExLink = styled.a`

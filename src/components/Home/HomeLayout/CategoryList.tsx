@@ -37,8 +37,8 @@ const CategoryList = (props: Props) => {
 
 const Heading = styled.h1`
   display: inline-block;
-  font-size: 24px;
-  color: dimgray;
+  font-size: 1.125rem;
+  color: #333;
   margin: 20px 20px 0;
 `
 const HorizontalSchrollBox = styled.ul`
@@ -46,9 +46,9 @@ const HorizontalSchrollBox = styled.ul`
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-  border-top: 2px solid #DDD;
-  border-bottom: 2px solid #DDD;
-  padding: 10px 0;
+  /* border-top: 2px solid #DDD;
+  border-bottom: 2px solid #DDD; */
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
   &::-webkit-scrollbar {
@@ -58,7 +58,7 @@ const HorizontalSchrollBox = styled.ul`
 const OuterTile = styled.li`
   display: inline-block;
   position: relative;
-  width: 40vw;
+  width: 100px;
   /* ${media.greaterThan('medium')`
     width: 14vw;
   `} */
@@ -78,27 +78,27 @@ const Tile = styled.div`
   position: relative;
   text-align: center;
   width: 100%;
-  height: 40vw;
+  height: 100px;
   /* ${media.greaterThan('medium')`
     height: 14vw;
   `} */
   margin: 0;
   color: white;
-  border: solid 3px #DDD;
-  border-radius: 10px;
+  border: solid 1px #DDD;
+  border-radius: 3px;
   overflow: hidden;
 `
 const Name = styled.div`
   display: block;
-  font-size: 16px;
-  line-height: 26px;
-  color: dimgray;
+  font-size: 11px;
+  line-height: 16px;
+  color: #333;
   text-align: center;
   width: 100%;
-  height: 48px;
   white-space: normal;
   overflow: hidden;
   padding-left: 3px;
+  padding-top: 2px;
 `
 
 export default CategoryList

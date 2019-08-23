@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { setHomeLayout, setHomeContents } from '../module/home'
-import categoryList, { setCategoryList } from '../module/categoryList'
+import { setCategoryList } from '../module/categoryList'
 import { push } from 'connected-react-router'
 import { showId } from '../module/id'
 import Home from '../components/Home/Home'

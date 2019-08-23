@@ -30,7 +30,7 @@ const TopImage = ({ content }: {content: any}) => {
 const Frame = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100vw / 1.6);
+  height: calc(100vw / 1.8);
   ${media.greaterThan('large')`
     height: 100vh;
   `}
