@@ -1,19 +1,19 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-// import media from 'styled-media-query'
+import media from 'styled-media-query'
 import { Link } from 'react-router-dom'
 
 interface Props {
-  categoryList: { [key: string]: string }
-  content: any
+  categoryList: CategoryList
+  content: LayoutCategoryList
 }
 
-const CategoryList = (props: Props) => {
-  let contents = props.categoryList
+const LayoutCategoryList = (props: Props) => {
+  let categories = props.categoryList
   let content = props.content
-  let items: any = []
-  Object.keys(contents).forEach((key, i) => {
+  let items: JSX.Element[] = []
+  Object.keys(categories).forEach((key, i) => {
     items.push(
       <OuterTile key={'OuterTile' + i}>
         <Link to={`/category/${key}`}>
@@ -21,7 +21,7 @@ const CategoryList = (props: Props) => {
             key={'Tile' + i}
             style={{ backgroundImage: `url(https://prizz.jp/assets/img/categoryList/${key}.jpg)` }} />
         </Link>
-        <Name key={'Name' + i}>{contents[key]}</Name>
+        <Name key={'Name' + i}>{categories[key]}</Name>
       </OuterTile>
     )
   })
@@ -59,9 +59,9 @@ const OuterTile = styled.li`
   display: inline-block;
   position: relative;
   width: 100px;
-  /* ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     width: 14vw;
-  `} */
+  `}
   height: auto;
   margin: 10px;
 `
@@ -101,4 +101,4 @@ const Name = styled.div`
   padding-top: 2px;
 `
 
-export default CategoryList
+export default LayoutCategoryList

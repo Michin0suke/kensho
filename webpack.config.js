@@ -36,7 +36,18 @@ module.exports = {
               plugins: [
                 '@babel/plugin-proposal-class-properties',
                 'babel-plugin-styled-components',
-                '@babel/plugin-transform-object-assign'
+                '@babel/plugin-transform-object-assign',
+                [
+                  'babel-plugin-root-import',
+                  {
+                    'paths': [
+                      {
+                        'rootPathSuffix': './src',
+                        'rootPathPrefix': '#/'
+                      }
+                    ]
+                  }
+                ]
               ]
             }
           }

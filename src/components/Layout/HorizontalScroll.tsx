@@ -1,43 +1,17 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-import media from '../../MediaQuery'
+import media from '#/components/MediaQuery'
 
 interface Props {
-  content: {
-    'ad_image': string
-    'ad_link': string
-    'ad_name': string
-    'ad_number': string
-    'ad_tracking': string
-    contents: [
-      {
-        'id': number,
-        'name': string,
-        'winner': number,
-        'image_url': string,
-        'image_bin': string,
-        'created_at': string,
-        'updated_at': string,
-        'limit_date': string,
-        'link': string,
-        'provider': string,
-        'way': string,
-        'category': string[]
-      }
-    ]
-    endpoint: string
-    heading: string
-    no: number
-    renderType: string
-  }
+  content: LayoutHorizontalScroll
   showId: (id: number) => void
 }
 
-const HorizontalScroll = ({ content, content: { contents }, showId }: Props) => {
+const LayoutHorizontalScroll = ({ content, content: { contents }, showId }: Props) => {
   let items = []
   for (let i in contents) {
-    if (i === content.ad_number) {
+    if (content.ad_number && i === content.ad_number.toString()) {
       items.push(
         <OuterTile key={'AD' + i}>
           <Tile>
@@ -205,4 +179,4 @@ const MoreText = styled.p`
 `
 */
 
-export default HorizontalScroll
+export default LayoutHorizontalScroll

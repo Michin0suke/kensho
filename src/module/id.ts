@@ -8,6 +8,10 @@ export const showId = (selectedId: number, content: {}) => ({
 export const hideId = () => ({
   type: 'HIDE_ID'
 })
+export const setLimit = (limit: string) => ({
+  type: 'SET_LIMIT',
+  limit
+})
 export const setCountdown = (countdown: string) => ({
   type: 'SET_COUNTDOWN',
   countdown
@@ -32,6 +36,12 @@ const content = (state = {}, { type, content }: {type: string, content: {}}) => 
     default: return state
   }
 }
+const limit = (state = '', { type, limit }: {type: string, limit: string}) => {
+  switch (type) {
+    case 'SET_LIMIT': return limit
+    default: return state
+  }
+}
 const countdown = (state = '', { type, countdown }: {type: string, countdown: string}) => {
   switch (type) {
     case 'SET_COUNTDOWN': return countdown
@@ -39,19 +49,10 @@ const countdown = (state = '', { type, countdown }: {type: string, countdown: st
   }
 }
 
-// const id = (state = initialState, action: Action) => {
-//   combineReducers({
-//     isShow,
-//     selectedId,
-//     content
-//   })(state, action)
-// }
-
-// export default id
-
 export default combineReducers({
   isShow,
   selectedId,
   content,
+  limit,
   countdown
 })

@@ -7,29 +7,34 @@ const dateCal = {
   seconds: (date: Date, num: number): Date => new Date(date.setSeconds(date.getSeconds() + num))
 }
 
-const dateToStr = (date: Date) => {
-  let year = date.getFullYear().toString()
-  let month = (date.getMonth() + 1).toString()
-  let day = date.getDate().toString()
-  let hours = date.getHours().toString()
+export const dateToStr = (date: Date) => {
+  date = dateCal.hours(date, -9)
+  let year: string
+  let month: string
+  let day: string
+  let hours: string
 
   if (date.getHours() === 0) {
     hours = ''
+    dateCal.date(date, -1)
   } else {
-    hours += '時'
+    hours = `${date.getHours().toString()}時`
   }
+
+  year = date.getFullYear().toString()
+  month = (date.getMonth() + 1).toString()
+  day = date.getDate().toString()
 
   return `${year}年${month}月${day}日 ${hours} `
 }
 
-const CountDown = (utcLimit: Date) => {
-  const now = Date.now()
-  const limit = dateCal.hours(utcLimit, -9)
+const countDown = (limit: Date) => {
+  const now = dateCal.hours(new Date(), 9).getTime()
   const limitNum: number = limit.getTime()
   let diff: number = limitNum - now
 
   if (diff < 0) {
-    return '終了しました。'
+    return '< 終了しました >'
   }
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24))
@@ -53,7 +58,7 @@ const CountDown = (utcLimit: Date) => {
   }
   disp += `${seconds}秒`
 
-  return `締め切り: ${dateToStr(limit)}（あと ${disp}）`
+  return `（あと ${disp}）`
 }
 
 // test
@@ -63,4 +68,4 @@ const CountDown = (utcLimit: Date) => {
 
 // setInterval(() => console.log(CountDown(limit)), 1000)
 
-export default CountDown
+export default countDown

@@ -1,65 +1,54 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
-import categoryList from '../../module/categoryList';
+import media from '#/components/MediaQuery'
 
 interface Props {
   hideId: () => null
-  /* showId: (id: number) => null */
-  fetchCategoryList: () => null
-  setCountdown: (countdown: Date) => null
+  setLimit: (limit: Date) => null
+  setCountdown: (limit: Date) => null
+  goCategory: (url: string) => null,
   showId: number,
   isShow: boolean,
-  content: any,
+  content: IdContent,
   categoryList: {[key: string]: string},
-  id: number,
-  controller1: AbortController,
-  controller2: AbortController,
+  limit: string,
   countdown: string
-}
-
-interface State {
-  categoryList: {}
-  countDown: string
 }
 
 const Id = (props: Props) => {
   let countdown: number
 
-  useEffect((): any => {
+  useEffect(() => {
     // タイムラグをなくすためにsetIntervalなしも必要
+    props.setLimit(new Date(props.content.limit_date))
     props.setCountdown(new Date(props.content.limit_date))
     countdown = setInterval(() => props.setCountdown(new Date(props.content.limit_date)), 1000)
   }, [])
 
   useEffect(() => () => {
     clearInterval(countdown)
-    props.controller1.abort()
-    props.controller2.abort()
   }, [])
 
-  // if (!props.isShow) {
-  //   return <div></div>
-  // }
-
   const categories = props.content.category.map((cg: string, i: number) =>
-    <CategoryButton key={i} href={`/category/${cg}`} onClick={() => {
-      props.hideId()
-    }}>{props.categoryList[cg]}</CategoryButton>
+    <Link key={i} to={`/category/${cg}`} onClick={() => props.goCategory(`/category/${cg}`)}>
+      <CategoryButton>{props.categoryList[cg]}</CategoryButton>
+    </Link>
   )
 
   return (
-    <Wrapper key={props.id} onClick={() => props.hideId()}>
+    <Wrapper onClick={() => props.hideId()}>
       <ContentBox>
         <Image style={{ backgroundImage: `url(${props.content.image_url})` }} />
         <Name>{props.content.name}</Name>
         <Winner>当選人数: {props.content.winner}人</Winner>
         <Way>応募方法: {props.content.way}</Way>
-        <Limit>{props.countdown}</Limit>
+        <Time>
+          <Limit>締め切り: {props.limit}</Limit><CountDown>{props.countdown}</CountDown>
+        </Time>
         <Provider>企画: {props.content.provider}</Provider>
         <Category>カテゴリ: {categories}</Category>
-        <Button>応募する！<ExLink href={props.content.link} /></Button>
+        <Button>応募する！<ExLink href={props.content.link} target='_brank' /></Button>
       </ContentBox>
     </Wrapper>
   )
@@ -77,7 +66,7 @@ const Wrapper = styled.div`
   padding: 0;
   z-index: 100;
   background-color: rgba(0,0,0,0.4);
-  /*
+  
   animation: fade-in 0.3s ease forwards;
   &:active {
     animation: fade-out 0.3s ease forwards;
@@ -90,7 +79,6 @@ const Wrapper = styled.div`
     0%   { opacity: 1 }
     100% { opacity: 0 }
   }
-  */
 `
 const ContentBox = styled.div`
   position: relative;
@@ -132,8 +120,17 @@ const Winner = styled.p`
 const Way = styled.p`
   font-size: 16px;
 `
+const Time = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 const Limit = styled.p`
   font-size: 16px;
+  margin: 0;
+`
+const CountDown = styled.p`
+  font-size: 16px;
+  margin: 0;
 `
 const Provider = styled.p`
   font-size: 16px;
@@ -141,7 +138,7 @@ const Provider = styled.p`
 const Category = styled.div`
   font-size: 16px;
 `
-const CategoryButton = styled.a`
+const CategoryButton = styled.div`
   display: inline-block;
   padding: 5px 5px 4px;
   background-color: #FF7EAA;

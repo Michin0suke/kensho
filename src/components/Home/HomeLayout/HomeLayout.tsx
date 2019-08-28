@@ -1,19 +1,17 @@
 import React, { useEffect } from 'react'
-import CategoryList from './CategoryList'
-import TopImage from './TopImage'
-import HorizontalScroll from './HorizontalScroll'
-import LargeCard from './LargeCard'
-import QuadCards from './QuadCards'
-import ThreeCards from './ThreeCards'
+import CategoryList from '#/components/Layout/CategoryList'
+import TopImage from '#/components/Layout/TopImage'
+import HorizontalScroll from '#/components/Layout/HorizontalScroll'
+import LargeCard from '#/components/Layout/LargeCard'
+import QuadCards from '#/components/Layout/QuadCards'
+import ThreeCards from '#/components/Layout/ThreeCards'
 
 interface Props {
-  contents: any
-  categoryList: {
-    [key: string]: string
-  }
-  layout: any
+  contents: { [key: number]: HomeContents }
+  categoryList: CategoryList
+  layout: HomeLayout
   showId: (id: number) => void
-  setHomeContents: (layout: any) => null
+  setHomeContents: (layout: HomeContents) => null
 }
 
 const HomeLayout = ({ contents, categoryList, showId, setHomeContents, layout }: Props) => {
@@ -25,17 +23,17 @@ const HomeLayout = ({ contents, categoryList, showId, setHomeContents, layout }:
   if (content !== undefined) {
     switch (content.renderType) {
       case 'categoryList':
-        return <CategoryList content={content} categoryList={categoryList}/>
+        return <CategoryList content={content as LayoutCategoryList} categoryList={categoryList}/>
       case 'topImage':
-        return <TopImage content={content}/>
+        return <TopImage content={content as LayoutTopImage}/>
       case 'horizontalScroll':
-        return <HorizontalScroll content={content} showId={showId}/>
+        return <HorizontalScroll content={content as LayoutHorizontalScroll} showId={showId}/>
       case 'largeCard':
-        return <LargeCard content={content}/>
+        return <LargeCard content={content as LayoutLargeCard}/>
       case 'quadCards':
-        return <QuadCards content={content} showId={showId}/>
+        return <QuadCards content={content as LayoutQuadCards} showId={showId}/>
       case 'threeCards':
-        return <ThreeCards content={content} showId={showId}/>
+        return <ThreeCards content={content as LayoutThreeCards} showId={showId}/>
       default:
         return <div>unknown renderType :{content.renderType}</div>
     }

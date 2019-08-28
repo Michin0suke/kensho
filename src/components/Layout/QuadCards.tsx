@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import styled from 'styled-components'
-import media from '../../MediaQuery'
+import media from '#/components/MediaQuery'
 
 interface Props {
-  content: any
+  content: LayoutQuadCards
   showId: (id: number) => void
 }
 
-const QuadCards = ({ content, content: { contents }, showId }: Props) => {
+const LayoutQuadCards = ({ content, content: { contents }, showId }: Props) => {
   const items = []
   for (let i in contents) {
     items.push(
@@ -23,9 +23,9 @@ const QuadCards = ({ content, content: { contents }, showId }: Props) => {
   return (
     <ContentBox>
       <Heading>{content.heading}</Heading>
-      <ThreeBox>
+      <QuadBox>
         {items}
-      </ThreeBox>
+      </QuadBox>
     </ContentBox>
   )
 }
@@ -39,7 +39,7 @@ const Heading = styled.h1`
   color: #333;
   margin: 0px 13px;
 `
-const ThreeBox = styled.div`
+const QuadBox = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -48,7 +48,7 @@ const ThreeBox = styled.div`
 `
 const OuterTile = styled.div`
   position: relative;
-  width: 30%;
+  width: 47%;
   ${media.greaterThan('medium')`
     width: 23%;
   `}
@@ -57,7 +57,7 @@ const OuterTile = styled.div`
 const Tile = styled.div`
   position: relative;
   width: 100%;
-  height: 28vw;
+  height: 40vw;
   ${media.greaterThan('medium')`
     height: 22vw;
   `}
@@ -87,4 +87,4 @@ const Name = styled.div`
   padding-top: 3px;
 `
 
-export default QuadCards
+export default LayoutQuadCards

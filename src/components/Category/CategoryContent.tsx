@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from '../MediaQuery'
+import media from '#/components/MediaQuery'
 
 interface Props {
   content: {
@@ -14,6 +14,7 @@ interface Props {
 const CategoryContent = ({ content, showId }: Props) => {
   const imageUrl = content.image_url
   const { id, name } = content
+
   return (
     <OuterTile>
       <Tile style={{ backgroundImage: `url(${imageUrl})` }}>

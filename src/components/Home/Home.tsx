@@ -1,88 +1,45 @@
 import React, { useEffect } from 'react'
-import Id from '../../containers/connectId'
-import HomeLayout from '../../containers/connectHomeLayout'
 import styled from 'styled-components'
-
-interface Layouts {
-  'no': number,
-  'renderType': string,
-  'heading': string,
-  'image_url': string,
-  'endpoint': string,
-  'ad_link'?: string,
-  'ad_image'?: string,
-  'ad_tracking'?: string,
-  'ad_name'?: string,
-  'ad_number'?: number
-}
-
-interface InContents {
-  'id': number,
-  'name': string,
-  'winner': number,
-  'image_url': string,
-  'image_bin': string,
-  'created_at': string,
-  'updated_at': string,
-  'limit_date': string,
-  'link': string,
-  'provider': string,
-  'way': string,
-  'category': string[]
-}
-interface Contents {
-  'contents'?: InContents[],
-  'no': number,
-  'renderType': string,
-  'heading'?: string,
-  'image_url'?: string,
-  'link'?: string
-}
-interface State {
-  'layouts': Layouts[],
-  'contents': Contents[],
-  'categoryList': { [key: string]: string }
-}
-
-// Idのため
-interface IdContents {
-  'contents': InContents[],
-  'no': number,
-  'renderType': string,
-  'heading'?: string,
-}
+import Id from '#/containers/connectId'
+import HomeLayout from '#/containers/connectHomeLayout'
 
 interface Props {
-  routerId?: number,
-  showId: (id?: number) => null,
+  // from Redux
+  id: Id,
+  contents: HomeContents[],
+  layout: HomeLayout[],
+  categoryList: CategoryList,
+  showId: (id: number) => null,
   fetchHomeLayout: () => null,
-  fetchCategoryList: () => null,
-  setHomeContents: (layout: any) => null,
-  id: {
-    isShow: boolean,
-    showedId: number,
-    content: {}
-  },
-  contents: [],
-  layout: [],
-  categoryList: {}
+  fetchCategoryList: () => null
+  // from Router
+  routerId: number
 }
 
-const Home = (props: Props) => {
+const Home = ({
+  id,
+  contents,
+  layout,
+  categoryList,
+  showId,
+  fetchHomeLayout,
+  fetchCategoryList,
+  routerId
+}: Props) => {
   useEffect(() => {
-    if (props.routerId) props.showId(props.routerId)
+    if (routerId) showId(routerId)
   }, [])
 
-  if (JSON.stringify(props.categoryList) === '{}') props.fetchCategoryList()
-  if (props.layout.length === 0) props.fetchHomeLayout()
+  if (JSON.stringify(categoryList) === '{}') fetchCategoryList()
+  if (layout.length === 0) fetchHomeLayout()
 
-  let renderContents: any[] = []
+  let renderContents: JSX.Element[] = []
 
-  if (props.id.isShow) {
-    renderContents.push(<Id key={-1} content={props.contents[props.id.showedId]} />)
+  if (id.isShow) {
+    renderContents.push(<Id key={-1} content={contents[id.selectedId]} />)
   }
 
-  props.layout.forEach((layout: any, index: number) => {
+  layout.forEach((layout: HomeLayout, index: number) => {
     renderContents.push(
       <HomeLayout
         key={index}
@@ -90,6 +47,7 @@ const Home = (props: Props) => {
       />
     )
   })
+
   return (
     <Wrapper>
       {renderContents}

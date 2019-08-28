@@ -8,11 +8,11 @@ export const setCategoryContents = (contents: {}, category: string) => ({
 
 interface Action {
   type: string
-  contents: {[key: string]: {}}
+  contents: CategoryContents
   category: string
 }
 
-const contents = (state: {[key: string]: any} = {}, { type, contents, category }: Action) => {
+const contents = (state: CategoryContents = {}, { type, contents, category }: Action) => {
   switch (type) {
     case 'SET_CATEGORY_CONTENTS':
       if (state[category]) {

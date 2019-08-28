@@ -1,42 +1,10 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { setHomeLayout, setHomeContents } from '../module/home'
-import { setCategoryList } from '../module/categoryList'
 import { push } from 'connected-react-router'
-import { showId } from '../module/id'
-import Home from '../components/Home/Home'
-
-interface InContents {
-  'id': number,
-  'name': string,
-  'winner': number,
-  'image_url': string,
-  'image_bin': string,
-  'created_at': string,
-  'updated_at': string,
-  'limit_date': string,
-  'link': string,
-  'provider': string,
-  'way': string,
-  'category': string[]
-}
-interface Contents {
-  'contents'?: InContents[],
-  'no': number,
-  'renderType': string,
-  'heading'?: string,
-  'image_url'?: string,
-  'link'?: string
-}
-
-interface State {
-  id: number,
-  home: {
-    contents: [],
-    layout: [],
-  },
-  categoryList: {}
-}
+import { setHomeLayout } from '#/module/home'
+import { setCategoryList } from '#/module/categoryList'
+import { showId } from '#/module/id'
+import Home from '#/components/Home/Home'
 
 const controller = new AbortController()
 
@@ -73,19 +41,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     .then(json => {
       const categoryList = JSON.parse(JSON.stringify(json))
       dispatch(setCategoryList(categoryList))
-    }),
-
-  setHomeContents: (layout: any) => {
-    if ('endpoint' in layout) {
-      fetch(`https://api.prizz.jp/${layout.endpoint}`)
-        .then(response => response.json())
-        .then(json => JSON.parse(JSON.stringify(json)))
-        .then(content => dispatch(setHomeContents(content, layout.no)))
-        .catch(ex => console.log('setHomeContent is parsing failed', ex))
-    } else {
-      dispatch(setHomeContents(layout, layout.no))
-    }
-  }
+    })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

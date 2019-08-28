@@ -1,17 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from '../../MediaQuery'
+import media from '#/components/MediaQuery'
 import { Link } from 'react-router-dom'
 
 interface Props {
-  content: {
-    'link': string,
-    'image_url': string,
-    'heading': string
-  }
+  content: LayoutLargeCard
 }
 
-const LargeCard = ({ content }: Props) => (
+const LayoutLargeCard = ({ content }: Props) => (
   <Link to={content.link}>
     <Tile style={{ backgroundImage: `url(${content.image_url})` }}>
       <Gradation />
@@ -60,4 +56,4 @@ const Gradation = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0) 70%, #444 100%);
 `
 
-export default LargeCard
+export default LayoutLargeCard

@@ -1,24 +1,22 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
-import { showId } from '../module/id'
-import { setHomeContents } from '../module/home'
-import HomeLayout from '../components/Home/HomeLayout/HomeLayout'
+import { showId } from '#/module/id'
+import { setHomeContents } from '#/module/home'
+import HomeLayout from '#/components/Home/HomeLayout/HomeLayout'
 
-const controller1 = new AbortController()
-const controller2 = new AbortController()
+const controller = new AbortController()
 
-const mapStateToProps = ({ home, categoryList }: {home: any, id: any, categoryList: any}) => ({
+const mapStateToProps = ({ home, categoryList }: {home: Home, categoryList: CategoryList}) => ({
   categoryList,
   contents: home.contents,
-  controller1,
-  controller2
+  controller
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   showId: (id: number) => {
     dispatch(push(`/id/${id}`))
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller1.signal })
+    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
         const content = JSON.parse(JSON.stringify(json)).contents[0]
@@ -27,7 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       .catch(ex => console.log('parsing failed :: showId in connectHomeLayout.ts', ex))
   },
 
-  setHomeContents: (layout: any) => {
+  setHomeContents: (layout: HomeLayout) => {
     if ('endpoint' in layout) {
       fetch(`https://api.prizz.jp/${layout.endpoint}`)
         .then(response => response.json())

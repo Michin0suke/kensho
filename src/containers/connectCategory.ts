@@ -1,23 +1,14 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
-import { showId } from '../module/id'
-import { setCategoryContents } from '../module/category'
-import { setCategoryList } from '../module/categoryList'
-import Category from '../components/Category/Category'
+import { showId } from '#/module/id'
+import { setCategoryContents } from '#/module/category'
+import { setCategoryList } from '#/module/categoryList'
+import Category from '#/components/Category/Category'
 
 const controller = new AbortController()
 
-interface Props {
-  categoryList: {}
-  category: {
-    contents: {
-      [key: string]: []
-    }
-  }
-}
-
-const mapStateToProps = ({ category, id, categoryList }: {category: any, id: any, categoryList: any}) => ({
+const mapStateToProps = ({ category, id, categoryList }: {category: Category, id: Id, categoryList: CategoryList}) => ({
   categoryList,
   contents: category.contents,
   selectedId: id.selectedId,

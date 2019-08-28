@@ -35,6 +35,20 @@
         //returnがいるやつ
         "@typescript-eslint/explicit-function-return-type": "off",
         //セミコロンがいるやつ
-        "@typescript-eslint/member-delimiter-style": "off"
+        "@typescript-eslint/member-delimiter-style": "off",
+        "import/resolver": {
+            "babel-plugin-root-import": {
+                "rootPathPrefix": "#",
+                "rootPathSuffix": "src"
+            }
+        }
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-plugin-root-import": {
+                "rootPathPrefix": "#",
+                "rootPathSuffix": "src"
+            }
+        }
     }
 }

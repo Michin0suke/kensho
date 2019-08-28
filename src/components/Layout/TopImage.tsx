@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from '../../MediaQuery'
-
-interface Props {
-  content: any
-}
+import media from '#/components/MediaQuery'
 
 const prizzSvg =
   <g id="prizz" data-name="prizz">
@@ -15,7 +11,7 @@ const prizzSvg =
     <rect x="61.96" y="21.13" width="5.33" height="41.07"/>
   </g>
 
-const TopImage = ({ content }: {content: any}) => {
+const LayoutTopImage = ({ content }: {content: LayoutTopImage}) => {
   return (
     <Frame>
       <Background />
@@ -87,4 +83,4 @@ const TopLogo = styled.svg`
   `}
 `
 
-export default TopImage
+export default LayoutTopImage

@@ -1,20 +1,10 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import CategoryContent from './CategoryContent'
-import media from '../MediaQuery'
 import { Link } from 'react-router-dom'
-import Id from '../../containers/connectId'
-
-interface CategoryRouterProps {
-  category: any
-}
-
-interface State {
-  contents: any[]
-  isId: number
-  categoryList: []
-}
+import InfiniteScroll from 'react-infinite-scroll-component'
+import styled from 'styled-components'
+import media from '#/components/MediaQuery'
+import CategoryContent from '#/components/Category/CategoryContent'
+import Id from '#/containers/connectId'
 
 interface Props {
   match: { params: { category: string }}
@@ -61,14 +51,6 @@ const Category = ({
       <rect x="61.96" y="21.13" width="5.33" height="41.07" />
     </g>
   )
-
-  interface CategoryContents {
-    content: {
-      'image_url': string,
-      'id': number,
-      'name': string
-    }
-  }
 
   const header = categoryList ? categoryList[category] : ''
   const data = contents[category] || []

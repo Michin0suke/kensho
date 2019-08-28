@@ -10,16 +10,6 @@ export const setHomeLayout = (layout: []) => ({
   layout
 })
 
-// const initialState = {
-//   contents: [],
-//   layout: []
-// }
-// interface Action {
-//   type: string
-//   contents?: []
-//   layout?: []
-// }
-
 const contents = (state = {}, { type, content, no }: {type: string, content: {}, no: number}) => {
   switch (type) {
     case 'SET_HOME_CONTENTS': return {
@@ -35,15 +25,6 @@ const layout = (state = [], { type, layout }: {type: string, layout: []}) => {
     default: return state
   }
 }
-
-// const home = (state = initialState, action: Action) => {
-//   combineReducers({
-//     contents,
-//     layout
-//   })(state, action)
-// }
-
-// export default home
 
 export default combineReducers({
   contents,
