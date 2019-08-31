@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
 import media from '#/components/MediaQuery'
 import CategoryContent from '#/components/Category/CategoryContent'
 import Id from '#/containers/connectId'
@@ -59,6 +60,16 @@ const Category = ({
 
   return (
     <Wrapper>
+      <Helmet
+        title={`Prizz 懸賞まとめ | ${header}`}
+        meta={[
+          { name: 'twitter:card', content: 'summary' },
+          { property: 'og:image', content: `https://prizz.jp/assets/img/categoryList/${category}.jpg` },
+          { property: 'og:title', content: `カテゴリ：${header}` },
+          { property: 'og:description', content: `もうすぐ締め切りの${header}の懸賞を今すぐチェック！！` },
+          { property: 'og:url', content: `https://prizz.jp/category/${category}` }
+        ]}
+      />
       {id}
       <Header>{`${header} (${data.length})`}</Header>
       <Link to="/">

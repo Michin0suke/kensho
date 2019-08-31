@@ -15,11 +15,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "npx tsc",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "postbuild": "react-snap"
   },
   "prettier": {
     "singleQuote": true,
     "semi": false
+  },
+  "reactSnap": {
+    "inlineCss": true
   },
   "keywords": [],
   "author": "",
@@ -48,6 +52,7 @@
     "@storybook/react": "^5.1.11",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "@types/react-helmet": "^5.0.9",
     "@types/react-infinite-scroll-component": "^4.2.4",
     "@types/react-redux": "^7.1.1",
     "@types/react-router-dom": "^4.3.4",
@@ -111,6 +116,7 @@
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
+    "react-snap": "^1.23.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
@@ -127,5 +133,8 @@
     "webpack-dev-middleware": "^3.7.0",
     "webpack-dev-server": "^3.7.2",
     "whatwg-fetch": "^3.0.0"
+  },
+  "dependencies": {
+    "react-helmet": "^5.2.1"
   }
 }

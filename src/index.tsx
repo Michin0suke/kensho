@@ -19,9 +19,11 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(...middlewares))
 )
 
+const rootElement = document.getElementById('app')
+
 render(
   <Provider store={store}>
     <App history={history}/>
   </Provider>,
-  document.getElementById('app')
+  rootElement
 )

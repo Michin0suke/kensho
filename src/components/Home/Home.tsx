@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
 import Id from '#/containers/connectId'
 import HomeLayout from '#/containers/connectHomeLayout'
 
@@ -50,6 +51,16 @@ const Home = ({
 
   return (
     <Wrapper>
+      <Helmet
+        title={'Prizz | 日本で一番使って楽しい懸賞まとめサイト'}
+        meta={[
+          { name: 'twitter:card', content: 'summary' },
+          { property: 'og:image', content: 'https://prizz.jp/assets/img/tag/twitter-card.png' },
+          { property: 'og:title', content: 'Prizz | 日本で一番使って楽しい懸賞まとめサイト' },
+          { property: 'og:description', content: '懸賞を、もっと楽しく！日本で一番使って楽しい懸賞まとめサイト' },
+          { property: 'og:url', content: 'https://prizz.jp/' }
+        ]}
+      />
       {renderContents}
     </Wrapper>
   )

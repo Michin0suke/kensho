@@ -6,7 +6,7 @@ import Id from '../components/Id/Id'
 import countDown, { dateToStr } from '../components/Id/CountDown'
 
 const mapStateToProps = ({ categoryList, id }: {categoryList: {}, id: any, home: any}) => ({
-  showId: id.id,
+  selectedId: id.selectedId,
   isShow: id.isShow,
   content: id.content,
   categoryList,

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import media from '#/components/MediaQuery'
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   setLimit: (limit: Date) => null
   setCountdown: (limit: Date) => null
   goCategory: (url: string) => null,
-  showId: number,
+  selectedId: number,
   isShow: boolean,
   content: IdContent,
   categoryList: {[key: string]: string},
@@ -38,6 +39,16 @@ const Id = (props: Props) => {
 
   return (
     <Wrapper onClick={() => props.hideId()}>
+      <Helmet
+        title={`Prizz 懸賞まとめ | ${props.content.name}`}
+        meta={[
+          { name: 'twitter:card', content: 'summary' },
+          { property: 'og:image', content: props.content.image_url },
+          { property: 'og:title', content: props.content.name },
+          { property: 'og:description', content: `当選人数：${props.content.winner} 締め切り：${props.limit} 企画：${props.content.provider} 応募方法：${props.content.way}` },
+          { property: 'og:url', content: `https://prizz.jp/id/${props.selectedId}` }
+        ]}
+      />
       <ContentBox>
         <Image style={{ backgroundImage: `url(${props.content.image_url})` }} />
         <Name>{props.content.name}</Name>
