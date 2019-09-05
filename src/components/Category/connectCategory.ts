@@ -5,6 +5,7 @@ import { showId } from '#/module/id'
 import { setCategoryContents } from '#/module/category'
 import { setCategoryList } from '#/module/categoryList'
 import Category from '#/components/Category/Category'
+import join from '#/tools/joinQuery'
 
 const controller = new AbortController()
 
@@ -30,12 +31,18 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   fetchCategoryContents: (c: string, offset = 0) => {
     const limit = 18
-    fetch(`https://api.prizz.jp/category/${c}?limit=${offset},${limit}`)
+    const params = {
+      category: c,
+      limit: `${offset},${limit}`,
+      order: 'deadline'
+    }
+    console.log(join('https://api.prizz.jp/contents', params))
+    fetch(join('https://api.prizz.jp/contents', params))
       .then(responce => responce.json())
       .then(json => {
+        console.log(json)
         let contents: {[key: string]: [{}]} = {}
-        contents[c] = JSON.parse(JSON.stringify(json)).contents
-        // キャメルケースにする
+        contents[c] = JSON.parse(JSON.stringify(json))
         dispatch(setCategoryContents(contents, c))
       })
       .catch(ex => console.log('parsing failed', ex))
@@ -47,7 +54,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         .then(responce => responce.json())
         .then(json => {
           const categoryList = JSON.parse(JSON.stringify(json))
-          console.log(categoryList)
           dispatch(setCategoryList(categoryList))
         })
     }

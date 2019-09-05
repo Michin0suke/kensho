@@ -1,8 +1,8 @@
 import Provide from '#/storybook/Provide'
 import { storiesOf } from '@storybook/react'
-import Home from '#/containers/connectHome'
-import Category from '#/containers/connectCategory'
-import Id from '#/containers/connectId'
+import Home from '#/components/Home/connectHome'
+import Category from '#/components/Category/connectCategory'
+import Id from '#/components/Id/connectId'
 
 storiesOf('Prizz', module)
   .add('Home', () => Provide(Home))

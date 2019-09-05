@@ -12,12 +12,22 @@ import '#/style.css'
 
 const history = createBrowserHistory()
 
-const middlewares = [logger, routerMiddleware(history)]
+let store: any
+const middlewares = [routerMiddleware(history), logger]
 
-export const store = createStore(
-  rootReducer(history),
-  composeWithDevTools(applyMiddleware(...middlewares))
-)
+// logger
+
+if (process.env.NODE_ENV === 'development') {
+  store = createStore(
+    rootReducer(history),
+    composeWithDevTools(applyMiddleware(...middlewares))
+  )
+} else {
+  store = createStore(
+    rootReducer(history),
+    applyMiddleware(routerMiddleware(history))
+  )
+}
 
 const rootElement = document.getElementById('app')
 

@@ -21,18 +21,17 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
-        const content = JSON.parse(JSON.stringify(json)).contents[0]
+        const content = JSON.parse(JSON.stringify(json))
         dispatch(showId(id, content))
       })
       .catch(ex => console.log('parsing failed :: showId in connectHomeLayout.ts', ex))
   },
 
-  fetchHomeLayout: () => fetch('https://prizz.jp/homeLayout.json')
+  fetchHomeLayout: () => fetch(process.env.NODE_ENV === 'development' ? 'https://prizz.jp/homeLayoutDev.json' : 'https://prizz.jp/homeLayout.json')
     .then(responce => responce.json())
     .then(json => {
       let layouts = JSON.parse(JSON.stringify(json))
       dispatch(setHomeLayout(layouts))
-      return layouts
     })
     .catch(ex => console.log('parsing failed', ex)),
 

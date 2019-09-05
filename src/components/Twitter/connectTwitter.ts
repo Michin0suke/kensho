@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import Twitter from '../components/Twitter/Twitter'
+import Twitter from './Twitter'
 import { setTwitterContents } from '#/module/twitter'
 
 const mapStateToProps = ({ twitter: { contents } }: {twitter: {contents: string}}) => ({ contents })

@@ -66,7 +66,7 @@ interface Home {
   layout: HomeLayout[]
 }
 
-type HomeContents = LayoutTopImage | LayoutHorizontalScroll | LayoutLargeCard | LayoutThreeCards | LayoutQuadCards | CategoryList
+type HomeContents = LayoutTopImage | LayoutHorizontalScroll | LayoutLargeCard | LayoutThreeCards | LayoutQuadCards | LayoutCategoryList | LayoutTopCarousel
 
 interface HomeLayout {
   'no': number
@@ -78,7 +78,7 @@ interface HomeLayout {
   'ad_image'?: string
   'ad_tracking'?: string
   'ad_name'?: string
-  'ad_number'?: number
+  'ad_number'?: string
 }
 
 interface Id {

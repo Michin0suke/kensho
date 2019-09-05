@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import H from 'history'
-import Home from '#/containers/connectHome'
-import Category from '#/containers/connectCategory'
+import Home from '#/components/Home/connectHome'
+import Category from '#/components/Category/connectCategory'
 // import Twitter from '#/containers/connectTwitter'
 
 const App = ({ history }: { history: H.History }) => (

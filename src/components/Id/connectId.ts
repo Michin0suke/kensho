@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { hideId, setLimit, setCountdown } from '../module/id'
+import { hideId, setLimit, setCountdown } from '../../module/id'
 import { push, goBack } from 'connected-react-router'
-import Id from '../components/Id/Id'
-import countDown, { dateToStr } from '../components/Id/CountDown'
+import Id from './Id'
+import countDown, { dateToStr } from './CountDown'
 
 const mapStateToProps = ({ categoryList, id }: {categoryList: {}, id: any, home: any}) => ({
   selectedId: id.selectedId,

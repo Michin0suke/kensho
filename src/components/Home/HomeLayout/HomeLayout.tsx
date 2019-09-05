@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import CategoryList from '#/components/Layout/CategoryList'
+import TopCarousel from '#/components/Layout/TopCarousel'
+import TotalNumber from '#/components/Layout/TotalNumber'
 import TopImage from '#/components/Layout/TopImage'
 import HorizontalScroll from '#/components/Layout/HorizontalScroll'
 import LargeCard from '#/components/Layout/LargeCard'
 import QuadCards from '#/components/Layout/QuadCards'
 import ThreeCards from '#/components/Layout/ThreeCards'
+import CinraHeader from '#/components/Layout/CinraHeader'
 
 interface Props {
   contents: { [key: number]: HomeContents }
@@ -12,9 +15,11 @@ interface Props {
   layout: HomeLayout
   showId: (id: number) => void
   setHomeContents: (layout: HomeContents) => null
+  setTopCarouselIndex: (nextIndex: number, contentNo: number) => null
+  addTopCarouselIndex: (contentsLength: number, contentNo: number) => null
 }
 
-const HomeLayout = ({ contents, categoryList, showId, setHomeContents, layout }: Props) => {
+const HomeLayout = ({ contents, categoryList, showId, setHomeContents, setTopCarouselIndex, addTopCarouselIndex, layout }: Props) => {
   useEffect(() => {
     if (!(layout.no in contents)) setHomeContents(layout)
   }, [])
@@ -22,6 +27,12 @@ const HomeLayout = ({ contents, categoryList, showId, setHomeContents, layout }:
   const content = contents[layout.no]
   if (content !== undefined) {
     switch (content.renderType) {
+      case 'cinraHeader':
+        return <CinraHeader />
+      case 'topCarousel':
+        return <TopCarousel content={content as LayoutTopCarousel} setTopCarouselIndex={setTopCarouselIndex} addTopCarouselIndex={addTopCarouselIndex} showId={showId}/>
+      case 'totalNumber':
+        return <TotalNumber/>
       case 'categoryList':
         return <CategoryList content={content as LayoutCategoryList} categoryList={categoryList}/>
       case 'topImage':

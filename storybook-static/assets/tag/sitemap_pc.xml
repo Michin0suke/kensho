@@ -1,12 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-<!--  created with free sitemap generation system www.sitemapxml.jp  --> 
 <url>
   <loc>https://prizz.jp/</loc>
   <priority>1.0</priority>
-  <lastmod>2019-07-10T00:12:34+09:00</lastmod>
+  <lastmod>2019-08-29T00:09:00+09:00</lastmod>
   <changefreq>always</changefreq>
+</url>
+
+<url>
+	<loc>https://prizz.jp/category/appliance</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/baby</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/books</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/cash</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/cosmetics</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/daily</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/fashion</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/foods</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/gift</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/goods</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/kitchen</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/movie</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/other</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/sports</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/stationery</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/ticket</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/toy</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/travel</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
+</url>
+<url>
+	<loc>https://prizz.jp/category/vehicle</loc>
+	<priority>1.0</priority>
+	<lastmod>2019-08-29T00:09:00+09:00</lastmod>
+	<changefreq>always</changefreq>
 </url>
 
 </urlset>

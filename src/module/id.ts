@@ -17,30 +17,6 @@ export const setCountdown = (countdown: string) => ({
   countdown
 })
 
-const initialContent = process.env.NODE_ENV === 'storybook'
-  ? {
-    id: 4430,
-    name: 'ロボット掃除機、コードレスクリーナー',
-    winner: 10020,
-    'image_url': 'https://www.chance.com/image/prizeimg/5d3069914c296.jpg',
-    'created_at': '2019-07-23T05:40:53Z',
-    'updated_at': '0001-01-01T00:00:00Z',
-    'limit_date': '2019-09-01T00:00:00Z',
-    link: 'https://park.sjnk.co.jp/campaign/ins_201907-08_enq/index.html',
-    provider: '損害保険ジャパン日本興亜株式会社',
-    way: '会員登録',
-    category: [
-      'appliance',
-      'foods',
-      'goods',
-      'stationery'
-    ],
-    'is_oneclick': false,
-    'twitter_way': null,
-    'twitter_raw': ''
-  }
-  : {}
-
 const isShow = (state = false, { type }: {type: string}) => {
   switch (type) {
     case 'SHOW_ID': return true
@@ -54,7 +30,7 @@ const selectedId = (state = 0, { type, selectedId }: {type: string, selectedId: 
     default: return state
   }
 }
-const content = (state = initialContent, { type, content }: {type: string, content: {}}) => {
+const content = (state = {}, { type, content }: {type: string, content: {}}) => {
   switch (type) {
     case 'SHOW_ID': return content
     default: return state

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from '#/components/MediaQuery'
+import media from '#/tools/mediaQuery'
 
 const prizzSvg =
   <g id="prizz" data-name="prizz">
@@ -78,7 +78,7 @@ const TopLogo = styled.svg`
   top: 4%;
   left: 3%;
   width: 10%;
-  ${media.greaterThan('medium')`
+  ${media.greaterThan('large')`
     width: 5%;
   `}
 `

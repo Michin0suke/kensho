@@ -1,59 +1,61 @@
 import React from 'react'
 import styled from 'styled-components'
-import media from '#/components/MediaQuery'
+import media from '#/tools/mediaQuery'
 import { Link } from 'react-router-dom'
 
 interface Props {
   content: LayoutLargeCard
 }
 
-const LayoutLargeCard = ({ content }: Props) => (
-  <Link to={content.link}>
-    <Tile style={{ backgroundImage: `url(${content.image_url})` }}>
-      <Gradation />
-      <Heading>{content.heading}</Heading>
-    </Tile>
-  </Link>
-)
+const LayoutLargeCard = ({ content }: Props) => {
+  if (process.env.NODE_ENV === 'storybook') {
+    return (
+      <Image src={content.image_url} />
+    )
+  } else {
+    return (
+      <Link to={content.link} onClick={() => alert('近日実装予定！お楽しみに！')}>
+        <Frame>
+          <Icon src='https://prizz.jp/assets/img/twitter_icon.svg' />
+          <Image src={content.image_url} />
+        </Frame>
+      </Link>
+    )
+  }
+}
 
-const Tile = styled.div`
+const Frame = styled.div`
+  display: block;
   position: relative;
-  width: 85vw;
-  height: calc(85vw / 2.4);
-  ${media.greaterThan('medium')`
-    height: calc(85vw/3)
-  `}
-  margin: 15px auto;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  border: solid 1px #ddd;
-  border-radius: 5px;
-  overflow: hidden;
+  width: 90vw;
+  height: auto;
+  margin: 15px auto 60px auto;
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  }
 `
-const Heading = styled.h1`
-  position: absolute;
-  bottom: 0;
-  display: inline-block;
-  font-size: 5vw;
-  ${media.greaterThan('medium')`
-    font-size: 40px;
-  `}
+const Image = styled.img`
   width: 100%;
-  text-align: center;
-  user-select: none;
-  color: whitesmoke;
-  margin: 0;
-  z-index: 10;
 `
-const Gradation = styled.div`
+const Icon = styled.img`
+  display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  user-select: none;
-  background: linear-gradient(rgba(0, 0, 0, 0) 70%, #444 100%);
+  width: 15vw;
+  top: 38%;
+  left: 3%;
+  animation: swing 2s ease infinite;
+  @keyframes swing {
+    80% {
+      transform: rotate(0deg)
+    }
+    90% {
+      transform: rotate(10deg)
+    }
+    100% {
+      transform: rotate(0deg)
+    }
+  }
 `
 
 export default LayoutLargeCard

@@ -6,7 +6,7 @@
   {
     "no": 0,
     "renderType": "topCarousel",
-    "endpoint": "https://prizz.jp/homeTopCarousel.json"
+    "endpoint": "https://prizz.jp/homeTopCarouselDev.json"
   },
   {
     "no": 15,
@@ -105,7 +105,7 @@
     "renderType": "threeCards",
     "heading": "DAILY",
     "heading_sub": "日用品",
-    "endpoint": "https://api.prizz.jp/contents&category=daily?limit=12"
+    "endpoint": "https://api.prizz.jp/contents?category=daily&limit=12"
   },
   {
     "no": 101,

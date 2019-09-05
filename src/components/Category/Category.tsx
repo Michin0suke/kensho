@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
-import media from '#/components/MediaQuery'
+import media from '#/tools/mediaQuery'
 import CategoryContent from '#/components/Category/CategoryContent'
-import Id from '#/containers/connectId'
+import Id from '#/components/Id/connectId'
 
 interface Props {
   match: { params: { category: string }}
@@ -29,6 +29,7 @@ const Category = ({
   fetchCategoryList
 }: Props) => {
   useEffect(() => {
+    console.log('w')
     fetchCategoryContents(category)
     fetchCategoryList(categoryList)
 
@@ -104,14 +105,14 @@ const Wrapper = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #eee;
+  /* background-color: #eee; */
 `
 const Header = styled.h1`
   font-size: 6vw;
   height: 9vw;
   padding: 3vw 0 2vw;
   
-  ${media.greaterThan('medium')`
+  ${media.greaterThan('large')`
     font-size: 3vw;
     height: 3vw;
     padding: 0.7vw 0 2vw;
@@ -132,7 +133,7 @@ const PrizzLogo = styled.svg`
   width: 8vw;
   top: 5vw;
   left: 3vw;
-  ${media.greaterThan('medium')`
+  ${media.greaterThan('large')`
     width: 4vw;
     top: 1.5vw;
     left: 1.5vw;
@@ -144,7 +145,7 @@ const PrizzLogo = styled.svg`
 const Margin = styled.div`
   width: 100%;
   height: 15vw;
-  ${media.greaterThan('medium')`
+  ${media.greaterThan('large')`
     height: 5vw;
   `}
 `

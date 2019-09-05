@@ -4,7 +4,10 @@ html {
 }
 body {
   margin: 0;
-  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: Roboto, "Open Sans", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
 }
 body::-webkit-scrollbar {
   display: none;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import media from '#/components/MediaQuery'
+import media from '#/tools/mediaQuery'
 
 interface Props {
   hideId: () => null
@@ -50,7 +50,7 @@ const Id = (props: Props) => {
         ]}
       />
       <ContentBox>
-        <Image style={{ backgroundImage: `url(${props.content.image_url})` }} />
+        <Image src={props.content.image_url} alt={props.content.name} />
         <Name>{props.content.name}</Name>
         <Winner>当選人数: {props.content.winner}人</Winner>
         <Way>応募方法: {props.content.way}</Way>
@@ -94,13 +94,13 @@ const Wrapper = styled.div`
 const ContentBox = styled.div`
   position: relative;
   width: 85%;
-  ${media.greaterThan('medium')`
+  ${media.greaterThan('large')`
     width: 50%;
   `}
   height: auto;
-  max-height: 80%;
+  max-height: 82%;
   border-radius: 10px;
-  margin: 30px auto;
+  margin: 60px auto 0px;
   padding: 16px;
   background-color: white;
   z-index: 110;
@@ -110,15 +110,12 @@ const ContentBox = styled.div`
 const Image = styled.img`
   width: 35vw;
   height: 35vw;
-  ${media.greaterThan('medium')`
+  ${media.greaterThan('large')`
     width: 20vw;
     height: 20vw;
   `}
   display: block;
   margin: 0 auto;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
   border: solid 2px whitesmoke;
   border-radius: 10px;
 `

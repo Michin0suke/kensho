@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
-import Id from '#/containers/connectId'
-import HomeLayout from '#/containers/connectHomeLayout'
+import Id from '#/components/Id/connectId'
+import HomeLayout from '#/components/Home/HomeLayout/connectHomeLayout'
 
 interface Props {
   // from Redux
@@ -67,7 +67,7 @@ const Home = ({
 }
 
 const Wrapper = styled.div`
-  background-color: #eee;
+  background-color: white;
 `
 
 export default Home
