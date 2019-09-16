@@ -1,21 +1,71 @@
-export const setTwitterContents = (twitterContents: string) => ({
-  type: 'SET_TWITTER_CONTENTS',
-  twitterContents
+import { combineReducers } from 'redux'
+
+export const setTwitterContents = (content: {}, no: number) => ({
+  type: 'SET_Twitter_CONTENTS',
+  content,
+  no
+})
+export const setTwitterLayout = (layout: []) => ({
+  type: 'SET_Twitter_LAYOUT',
+  layout
+})
+export const setTwitterTopCarouselIndex = (nextIndex: number, no: number) => ({
+  type: 'SET_TWITTER_TOPCAROUSEL_INDEX',
+  nextIndex,
+  no
+})
+export const addTwitterTopCarouselIndex = (contentsLength: number, no: number) => ({
+  type: 'ADD_TWITTER_TOPCAROUSEL_INDEX',
+  contentsLength,
+  no
 })
 
 interface Action {
-  type: string
-  twitterContents: string
+  type: string,
+  content: {},
+  no: number,
+  nextIndex: number,
+  contentsLength: number
 }
 
-const twitter = (state = {}, { type, twitterContents }: Action) => {
+const contents = (state: { [key: string]: { contents: { showedIndex: number } } } = {}, { type, content, no, nextIndex, contentsLength }: Action) => {
   switch (type) {
-    case 'SET_TWITTER_CONTENTS': return {
+    case 'SET_Twitter_CONTENTS': return {
       ...state,
-      contents: twitterContents
+      [no]: content
     }
+    case 'SET_TWITTER_TOPCAROUSEL_INDEX': return {
+      ...state,
+      [no]: {
+        ...state[no],
+        contents: {
+          ...state[no].contents,
+          showedIndex: nextIndex
+        }
+      }
+    }
+    case 'ADD_TWITTER_TOPCAROUSEL_INDEX':
+      return {
+        ...state,
+        [no]: {
+          ...state[no],
+          contents: {
+            ...state[no].contents,
+            showedIndex: (state[no].contents.showedIndex + 1) % contentsLength
+          }
+        }
+      }
+    default: return state
+  }
+}
+const layout = (state = [], { type, layout }: {type: string, layout: []}) => {
+  switch (type) {
+    case 'SET_Twitter_LAYOUT': return layout
     default: return state
   }
 }
 
-export default twitter
+export default combineReducers({
+  contents,
+  layout
+})

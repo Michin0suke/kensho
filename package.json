@@ -10,7 +10,7 @@
     "build-reference": "open https://qiita.com/tanaka0325/items/f0d217e4e967286046a0",
     "dev": "npx @babel/node server/server.js",
     "i": "--open-page /",
-    "start": "webpack-dev-server --hot --inline --watch-content-base --content-base public/ --open 'Google Chrome' --host '192.168.0.11' --port 8080 --historyApiFallback true --open-page 'category/appliance'",
+    "start": "webpack-dev-server --hot --inline --watch-content-base --content-base public/ --open 'Google Chrome' --host '192.168.0.11' --port 8080 --historyApiFallback true",
     "start-reference": "open https://qiita.com/riversun/items/d27f6d3ab7aaa119deab",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "npx tsc",

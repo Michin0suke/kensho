@@ -50,7 +50,7 @@ const Id = (props: Props) => {
         ]}
       />
       <ContentBox>
-        <Image src={props.content.image_url} alt={props.content.name} />
+        <Image src={props.content.image_url} alt={props.content.name} style={{ backgroundImage: 'url(https://prizz.jp/assets/img/defaultImg.svg)' }}/>
         <Name>{props.content.name}</Name>
         <Winner>当選人数: {props.content.winner}人</Winner>
         <Way>応募方法: {props.content.way}</Way>
@@ -75,7 +75,7 @@ const Wrapper = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
-  z-index: 100;
+  z-index: 1000;
   background-color: rgba(0,0,0,0.4);
   
   animation: fade-in 0.3s ease forwards;
@@ -118,6 +118,7 @@ const Image = styled.img`
   margin: 0 auto;
   border: solid 2px whitesmoke;
   border-radius: 10px;
+  color: rgba(0,0,0,0)
 `
 const Name = styled.h1`
   font-size: 20px;

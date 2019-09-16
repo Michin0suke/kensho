@@ -1,13 +1,17 @@
 import styled from 'styled-components'
+import media from '#/tools/mediaQuery'
 
 export const HeadingBox = styled.h1`
   position: relative;
   display: block;
-  margin: 30px 15px 0 15px;
   padding: 1px;
   height: 1.5rem;
   border-bottom: solid 1px #CCC;
   box-sizing: border-box;
+  margin: 30px 15px 0;
+  ${media.greaterThan('large')`
+    margin: 30px 10% 0; 
+  `}
 `
 const Heading = styled.div`
   float: left;

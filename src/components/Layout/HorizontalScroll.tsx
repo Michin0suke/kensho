@@ -78,6 +78,10 @@ const HorizontalSchrollBox = styled.ul`
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  ${media.greaterThan('large')`
+    width: 80%;
+    margin: 10px 10% 0;
+  `}
   height: 200px;
   /*border-top: 2px solid #DDD;
   border-bottom: 2px solid #DDD;*/
@@ -92,9 +96,6 @@ const OuterTile = styled.li`
   display: inline-block;
   position: relative;
   width: 100px;
-  ${media.greaterThan('large')`
-    width: 14vw;
-  `}
   margin: 13px 7px 0;
   &:hover {
     transform: scale(1.05)
@@ -112,9 +113,6 @@ const Tile = styled.article`
   text-align: center;
   width: 100%;
   height: 100px;
-  ${media.greaterThan('large')`
-    height: 14vw;
-  `}
   margin: 0;
   color: white;
   border: solid 1px #DDD;
@@ -148,11 +146,18 @@ const NLink = styled.a`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 10;
 `
 const Img = styled.img`
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100px;
+  height: 100%;
   border: 0;
+  color: rgba(0,0,0,0);
+  font-size: 5px;
 `
 const AdImg = styled.img`
   width: 100%;
@@ -165,6 +170,10 @@ const Arrow = styled.svg`
   width: 40px;
   right: 10px;
   top: 70px;
+  ${media.greaterThan('large')`
+    right: 10%;
+    top: 78px;
+  `}
   z-index: 10;
   animation: flash 3s ease infinite;
   @keyframes flash {

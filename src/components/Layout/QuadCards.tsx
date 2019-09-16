@@ -45,6 +45,10 @@ const LayoutQuadCards = ({ content, content: { contents }, showId }: Props) => {
 const ContentBox = styled.div`
   position: relative;
   margin: 10px 10px;
+  ${media.greaterThan('large')`
+    width: 80%;
+    margin: 10px auto;
+  `}
 `
 const QuadBox = styled.div`
   display: flex;
@@ -57,7 +61,7 @@ const OuterTile: any = styled.div`
   position: relative;
   width: 48%;
   ${media.greaterThan('large')`
-    width: 23%;
+    width: 22%;
   `}
   ${(props: any) => props.display}
   margin: 10px 0;
@@ -70,7 +74,7 @@ const Tile = styled.div`
   width: 100%;
   height: 47vw;
   ${media.greaterThan('large')`
-    height: 22vw;
+    height: 15vw;
   `}
   margin: 0 auto;
   border: solid 1px #DDD;

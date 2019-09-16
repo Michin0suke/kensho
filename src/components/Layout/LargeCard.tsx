@@ -14,7 +14,7 @@ const LayoutLargeCard = ({ content }: Props) => {
     )
   } else {
     return (
-      <Link to={content.link} onClick={() => alert('近日実装予定！お楽しみに！')}>
+      <Link to={content.link}>
         <Frame>
           <Icon src='https://prizz.jp/assets/img/twitter_icon.svg' />
           <Image src={content.image_url} />
@@ -28,8 +28,12 @@ const Frame = styled.div`
   display: block;
   position: relative;
   width: 90vw;
-  height: auto;
   margin: 15px auto 60px auto;
+  ${media.greaterThan('large')`
+    width: 40%;
+    margin: 10px auto 30px auto;
+  `}
+  height: auto;
   &:hover {
     transform: scale(1.01);
     box-shadow: 0 0 6px rgba(0,0,0,0.1);
@@ -42,6 +46,9 @@ const Icon = styled.img`
   display: block;
   position: absolute;
   width: 15vw;
+  ${media.greaterThan('large')`
+    width: 17%;
+  `}
   top: 38%;
   left: 3%;
   animation: swing 2s ease infinite;

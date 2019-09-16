@@ -61,11 +61,4 @@ const countDown = (limit: Date) => {
   return `（あと ${disp}）`
 }
 
-// test
-// const limit = new Date('2019-08-31T15:00:00Z')
-// console.log(limit)
-// console.log(CountDown(limit))
-
-// setInterval(() => console.log(CountDown(limit)), 1000)
-
 export default countDown

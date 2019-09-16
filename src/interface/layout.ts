@@ -62,3 +62,6 @@ interface LayoutTopCarousel {
     ]
   }
 }
+interface TotalNumber {
+  'endpoint': string
+}

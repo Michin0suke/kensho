@@ -34,9 +34,10 @@ const OuterTile = styled.div`
   width: 30%;
   margin: 2vw 1.5%;
   ${media.greaterThan('large')`
-    width: 21%;
-    height: 25vw;
-    margin: 5vw 1.9vw;
+    width: 10%;
+    height: 17vw;
+    margin: 0;
+    padding : 10px 1.24vw 30px;
   `}
   float: left;
   position: relative;
@@ -51,7 +52,7 @@ const Tile = styled.div`
   width: 100%;
   height: 30vw;
   ${media.greaterThan('large')`
-    height: 22vw;
+    height: 10vw;
   `}
   margin: 0 auto;
   background-size: cover;
@@ -82,6 +83,10 @@ const VisitedIcon = styled.a`
   width: 20px;
   top: -10px;
   right: -10px;
+  ${media.greaterThan('large')`
+    top: -5px;
+    right: -5px;
+  `}
   border-radius: 50%;
   background-color: white;
   pointer-events: none;

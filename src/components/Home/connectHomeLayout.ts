@@ -2,8 +2,8 @@ import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { showId } from '#/module/id'
-import { setHomeContents, setTopCarouselIndex, addTopCarouselIndex } from '#/module/home'
-import HomeLayout from '#/components/Home/HomeLayout/HomeLayout'
+import { setHomeContents, setHomeTopCarouselIndex, addHomeTopCarouselIndex } from '#/module/home'
+import HomeLayout from '#/components/Home/HomeLayout'
 
 const controller = new AbortController()
 
@@ -41,12 +41,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     }
   },
 
-  setTopCarouselIndex: (nextIndex: number, contentNo: number) => {
-    dispatch(setTopCarouselIndex(nextIndex, contentNo))
+  setHomeTopCarouselIndex: (nextIndex: number, contentNo: number) => {
+    dispatch(setHomeTopCarouselIndex(nextIndex, contentNo))
   },
 
-  addTopCarouselIndex: (contentsLength: number, contentNo: number) => {
-    dispatch(addTopCarouselIndex(contentsLength, contentNo))
+  addHomeTopCarouselIndex: (contentsLength: number, contentNo: number) => {
+    dispatch(addHomeTopCarouselIndex(contentsLength, contentNo))
   }
 })
 

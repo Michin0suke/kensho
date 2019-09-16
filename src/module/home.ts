@@ -9,13 +9,13 @@ export const setHomeLayout = (layout: []) => ({
   type: 'SET_HOME_LAYOUT',
   layout
 })
-export const setTopCarouselIndex = (nextIndex: number, no: number) => ({
-  type: 'SET_TOPCAROUSEL_INDEX',
+export const setHomeTopCarouselIndex = (nextIndex: number, no: number) => ({
+  type: 'SET_HOME_TOPCAROUSEL_INDEX',
   nextIndex,
   no
 })
-export const addTopCarouselIndex = (contentsLength: number, no: number) => ({
-  type: 'ADD_TOPCAROUSEL_INDEX',
+export const addHomeTopCarouselIndex = (contentsLength: number, no: number) => ({
+  type: 'ADD_HOME_TOPCAROUSEL_INDEX',
   contentsLength,
   no
 })
@@ -34,7 +34,7 @@ const contents = (state: { [key: string]: { contents: { showedIndex: number } } 
       ...state,
       [no]: content
     }
-    case 'SET_TOPCAROUSEL_INDEX': return {
+    case 'SET_HOME_TOPCAROUSEL_INDEX': return {
       ...state,
       [no]: {
         ...state[no],
@@ -44,7 +44,7 @@ const contents = (state: { [key: string]: { contents: { showedIndex: number } } 
         }
       }
     }
-    case 'ADD_TOPCAROUSEL_INDEX':
+    case 'ADD_HOME_TOPCAROUSEL_INDEX':
       return {
         ...state,
         [no]: {

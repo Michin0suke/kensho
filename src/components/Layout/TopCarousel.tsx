@@ -8,7 +8,7 @@ interface Props {
   content: LayoutTopCarousel,
   setTopCarouselIndex: (nextIndex: number, no: number) => null,
   addTopCarouselIndex: (contentsLength: number, no: number) => null,
-  showId: (id: number) => null
+  showId: (id: number) => void
 }
 
 const TopCarousel = ({
@@ -17,7 +17,6 @@ const TopCarousel = ({
   addTopCarouselIndex,
   showId
 }: Props) => {
-  console.log(content)
   let autoSlide: number
   const slides = content.contents.slides
   const { no } = content
@@ -93,12 +92,13 @@ const Frame = styled.div`
   position: relative;
   width: 100%;
   height: 80vw;
-  margin-bottom: 30px;
+  margin: 0;
   background-color: #f5f7f8;
+  overflow: hidden;
   ${media.greaterThan('large')`
     height: 45vw;
     max-height: 92vh;
-    width: 100vw;
+    width: 100%;
   `}
   animation: appear 1s ease both;
   @keyframes appear {
@@ -111,8 +111,8 @@ const Frame = styled.div`
   }
 `
 const BackTile = styled.div`
-  background-image: url("https://prizz.jp/assets/img/marble-sp.png");
-  background-position: center center;
+  /* background-image: url("https://prizz.jp/assets/img/marble-sp.png"); */
+  /* background-position: center center;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -120,15 +120,35 @@ const BackTile = styled.div`
   width: 100%;
   height: 93%;
   z-index: 10;
+  margin: 0;
+  padding: 0;
   ${media.greaterThan('large')`
     top: -15%;
     right: -10%;
     bottom: auto;
     left: auto;
+  `} */
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 130%;
+  z-index: 10;
+  margin: 0;
+  padding: 0; */
+  ${media.greaterThan('large')`
+    top: -60%;
+    right: -120%;
+    bottom: auto;
+    left: auto;
+    background-color: #F8C862;
+    border-radius: 35% 35% 35% 35% / 35% 35% 35% 35%;
   `}
 `
 const ImageFrame = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;

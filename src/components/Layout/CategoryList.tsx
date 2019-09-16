@@ -8,6 +8,7 @@ import Heading, { HeadingBox, HeadingSub } from '#/components/styled/Heading'
 interface Props {
   categoryList: CategoryList
   content: LayoutCategoryList
+  isTwitter: boolean
 }
 
 const arrow = (color: string = '#f2b146') => (
@@ -17,29 +18,27 @@ const arrow = (color: string = '#f2b146') => (
   </g>
 )
 
-const LayoutCategoryList = (props: Props) => {
-  let categories = props.categoryList
-  let content = props.content
+const LayoutCategoryList = ({ categoryList, content, isTwitter }: Props) => {
   let items: JSX.Element[] = []
-  Object.keys(categories).forEach((key, i) => {
+  Object.keys(categoryList).forEach((key, i) => {
     if (process.env.NODE_ENV === 'storybook') {
       items.push(
         <OuterTile key={i}>
           <Tile>
             <Img src={`https://prizz.jp/assets/img/categoryList/${key}.jpg`} />
-            <Name>{categories[key]}</Name>
+            <Name>{categoryList[key]}</Name>
           </Tile>
-          <Name>{categories[key]}</Name>
+          <Name>{categoryList[key]}</Name>
         </OuterTile>
       )
     } else {
       items.push(
         <OuterTile key={i}>
-          <Link to={`/category/${key}`}>
+          <Link to={isTwitter ? `/twitter/category/${key}` : `/category/${key}`}>
             <Tile>
               <Img src={`https://prizz.jp/assets/img/categoryList/${key}.jpg`} />
             </Tile>
-            <Name>{categories[key]}</Name>
+            <Name>{categoryList[key]}</Name>
           </Link>
         </OuterTile>
       )
@@ -63,11 +62,15 @@ const HorizontalSchrollBox = styled.ul`
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  ${media.greaterThan('large')`
+    width: 80%;
+    margin: 10px 10% 0;
+  `}
   height: 160px;
   /*border-top: 2px solid #DDD;
   border-bottom: 2px solid #DDD;*/
   padding: 0 0 0 6px;
-  margin: 10px 0 0 0;
+  margin: 10px 0 0;
   box-sizing: border-box;
   &::-webkit-scrollbar {
     display: none;
@@ -77,9 +80,6 @@ const OuterTile = styled.li`
   display: inline-block;
   position: relative;
   width: 100px;
-  ${media.greaterThan('large')`
-    width: 14vw;
-  `}
   margin: 7px;
 `
 const Tile = styled.article`
@@ -94,9 +94,6 @@ const Tile = styled.article`
   text-align: center;
   width: 100%;
   height: 100px;
-  ${media.greaterThan('large')`
-    height: 14vw;
-  `}
   margin: 0;
   color: white;
   border: solid 1px #DDD;
@@ -104,8 +101,11 @@ const Tile = styled.article`
   overflow: hidden;
 `
 const Img = styled.img`
-  width: 100%;
-  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100%;
   border: 0;
 `
 const Name = styled.p`
@@ -130,6 +130,10 @@ const Arrow = styled.svg`
   width: 40px;
   right: 10px;
   top: 70px;
+  ${media.greaterThan('large')`
+    right: 10%;
+    top: 73px;
+  `}
   z-index: 10;
   animation: flash 3s ease infinite;
   @keyframes flash {

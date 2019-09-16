@@ -3,7 +3,10 @@ html {
   width: 100vw;
 }
 body {
+  width: 100vw;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   /*font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   font-family: Roboto, "Open Sans", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
   -webkit-font-smoothing: antialiased;

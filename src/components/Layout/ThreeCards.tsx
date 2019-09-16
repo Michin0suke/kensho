@@ -44,24 +44,33 @@ const LayoutQuadCards = ({ content, content: { contents }, showId }: Props) => {
 }
 
 const ContentBox = styled.div`
-  position: relative;
-  margin: 10px 10px;
+  height: 100%;
+  padding: 0;
+  width: 100%;
+  margin: 10px 0 0;
+  ${media.greaterThan('large')`
+    width: 80%;
+    margin: 25px auto 0;
+  `}
 `
 const ThreeBox = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  width: 100%;
+  width: 96%;
+  margin: 0 auto;
   height: auto;
 `
 const OuterTile: any = styled.div`
   position: relative;
-  width: 31%;
+  width: 28%;
+  padding: 10px 2%;
+  margin: 0;
   ${media.greaterThan('large')`
-    width: 23%;
+    width: 13%;
+    padding: 10px 1.5%;
   `}
   ${(props: any) => props.display}
-  margin: 10px 0;
   &:hover {
     transform: scale(1.05)
   }
@@ -71,7 +80,7 @@ const Tile = styled.div`
   width: 100%;
   height: 28vw;
   ${media.greaterThan('large')`
-    height: 22vw;
+    height: 10vw;
   `}
   margin: 0 auto;
   border: solid 1px #DDD;
@@ -102,8 +111,8 @@ const Name = styled.div`
 const VisitedIcon = styled.a`
   position: absolute;
   width: 20px;
-  top: -10px;
-  right: -10px;
+  top: -5px;
+  right: -5px;
   border-radius: 50%;
   background-color: white;
   pointer-events: none;

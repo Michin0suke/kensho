@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
-        const content = JSON.parse(JSON.stringify(json)).contents[0]
+        const content = JSON.parse(JSON.stringify(json))
         dispatch(showId(id, content))
       })
       .catch(ex => console.log('parsing failed :: showId in connectHomeLayout.ts', ex))
@@ -36,11 +36,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       limit: `${offset},${limit}`,
       order: 'deadline'
     }
-    console.log(join('https://api.prizz.jp/contents', params))
     fetch(join('https://api.prizz.jp/contents', params))
       .then(responce => responce.json())
       .then(json => {
-        console.log(json)
         let contents: {[key: string]: [{}]} = {}
         contents[c] = JSON.parse(JSON.stringify(json))
         dispatch(setCategoryContents(contents, c))
@@ -50,7 +48,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   fetchCategoryList: (categoryList: {}) => {
     if (JSON.stringify(categoryList) === '{}') {
-      fetch('https://prizz.jp/categoryList.json')
+      fetch('https://prizz.jp/assets/layout/categoryList.json')
         .then(responce => responce.json())
         .then(json => {
           const categoryList = JSON.parse(JSON.stringify(json))

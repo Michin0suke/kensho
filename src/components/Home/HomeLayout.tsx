@@ -15,11 +15,11 @@ interface Props {
   layout: HomeLayout
   showId: (id: number) => void
   setHomeContents: (layout: HomeContents) => null
-  setTopCarouselIndex: (nextIndex: number, contentNo: number) => null
-  addTopCarouselIndex: (contentsLength: number, contentNo: number) => null
+  setHomeTopCarouselIndex: (nextIndex: number, contentNo: number) => null
+  addHomeTopCarouselIndex: (contentsLength: number, contentNo: number) => null
 }
 
-const HomeLayout = ({ contents, categoryList, showId, setHomeContents, setTopCarouselIndex, addTopCarouselIndex, layout }: Props) => {
+const HomeLayout = ({ contents, categoryList, showId, setHomeContents, setHomeTopCarouselIndex, addHomeTopCarouselIndex, layout }: Props) => {
   useEffect(() => {
     if (!(layout.no in contents)) setHomeContents(layout)
   }, [])
@@ -30,11 +30,11 @@ const HomeLayout = ({ contents, categoryList, showId, setHomeContents, setTopCar
       case 'cinraHeader':
         return <CinraHeader />
       case 'topCarousel':
-        return <TopCarousel content={content as LayoutTopCarousel} setTopCarouselIndex={setTopCarouselIndex} addTopCarouselIndex={addTopCarouselIndex} showId={showId}/>
+        return <TopCarousel content={content as LayoutTopCarousel} setTopCarouselIndex={setHomeTopCarouselIndex} addTopCarouselIndex={addHomeTopCarouselIndex} showId={showId}/>
       case 'totalNumber':
-        return <TotalNumber/>
+        return <TotalNumber content={content as TotalNumber}/>
       case 'categoryList':
-        return <CategoryList content={content as LayoutCategoryList} categoryList={categoryList}/>
+        return <CategoryList content={content as LayoutCategoryList} categoryList={categoryList} isTwitter={false}/>
       case 'topImage':
         return <TopImage content={content as LayoutTopImage}/>
       case 'horizontalScroll':

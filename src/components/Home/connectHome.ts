@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       .catch(ex => console.log('parsing failed :: showId in connectHomeLayout.ts', ex))
   },
 
-  fetchHomeLayout: () => fetch(process.env.NODE_ENV === 'development' ? 'https://prizz.jp/homeLayoutDev.json' : 'https://prizz.jp/homeLayout.json')
+  fetchHomeLayout: () => fetch(process.env.NODE_ENV === 'development' ? 'https://prizz.jp/assets/layout/home/layout_dev.json' : 'https://prizz.jp/assets/layout/home/layout.json')
     .then(responce => responce.json())
     .then(json => {
       let layouts = JSON.parse(JSON.stringify(json))
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     })
     .catch(ex => console.log('parsing failed', ex)),
 
-  fetchCategoryList: () => fetch('https://prizz.jp/categoryList.json')
+  fetchCategoryList: () => fetch('https://prizz.jp/assets/layout/categoryList.json')
     .then(responce => responce.json())
     .then(json => {
       const categoryList = JSON.parse(JSON.stringify(json))

@@ -3,7 +3,7 @@ interface State {
   categoryList: CategoryList
   home: Home
   id: Id
-  twitter: {}
+  twitter: Twitter
 }
 
 interface Category {
@@ -65,10 +65,30 @@ interface Home {
   }
   layout: HomeLayout[]
 }
+interface Twitter {
+  contents: {
+    [key: number]: TwitterContents[]
+  }
+  layout: TwitterLayout[]
+}
 
 type HomeContents = LayoutTopImage | LayoutHorizontalScroll | LayoutLargeCard | LayoutThreeCards | LayoutQuadCards | LayoutCategoryList | LayoutTopCarousel
+type TwitterContents = LayoutTopImage | LayoutHorizontalScroll | LayoutLargeCard | LayoutThreeCards | LayoutQuadCards | LayoutCategoryList | LayoutTopCarousel
 
 interface HomeLayout {
+  'no': number
+  'renderType': string
+  'heading': string
+  'image_url': string
+  'endpoint'?: string
+  'ad_link'?: string
+  'ad_image'?: string
+  'ad_tracking'?: string
+  'ad_name'?: string
+  'ad_number'?: string
+}
+
+interface TwitterLayout {
   'no': number
   'renderType': string
   'heading': string
