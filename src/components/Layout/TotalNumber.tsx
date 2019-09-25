@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import media from '#/tools/mediaQuery'
+import resolveEndpoint from '#/tools/resolveEndpoint'
 
 const TotalNumber = ({ content: { endpoint } }: { content: TotalNumber }) => {
   const [totalNumber, setTotalNumber] = useState('')
 
   useEffect(() => {
-    fetch(endpoint)
+    fetch(resolveEndpoint(endpoint))
       .then(responce => responce.json())
       .then(json => JSON.parse(JSON.stringify(json)))
       .then(c => setTotalNumber(c['total_number']))

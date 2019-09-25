@@ -11,12 +11,13 @@ import rootReducer from '#/module/root'
 import '#/style.css'
 
 const history = createBrowserHistory()
+console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV)
 
 let store: any
 // const middlewares = [routerMiddleware(history), logger]
 const middlewares = [routerMiddleware(history)]
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   store = createStore(
     rootReducer(history),
     composeWithDevTools(applyMiddleware(...middlewares))

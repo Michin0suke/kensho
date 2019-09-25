@@ -7,6 +7,7 @@ import categoryList from '#/module/categoryList'
 import category from '#/module/category'
 import twitter from '#/module/twitter'
 import twitterCategory from '#/module/twitterCategory'
+import login from '#/module/login'
 
 export default (history: H.History) => combineReducers(
   {
@@ -16,6 +17,7 @@ export default (history: H.History) => combineReducers(
     categoryList,
     category,
     twitter,
-    twitterCategory
+    twitterCategory,
+    login
   }
 )

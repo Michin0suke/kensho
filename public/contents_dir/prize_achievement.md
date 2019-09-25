@@ -1,15 +1,16 @@
 # Prizzの当選実績
 
 懸賞詐欺が多発しているので、Prizzの企画の過去の当選実績を載せます！
-なお、Prizzは第８回以前、「Maezawa」という名前でした。
 
+###【第10回】2019/9/1
 
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Prizzさん（<a href="https://twitter.com/prizzjp?ref_src=twsrc%5Etfw">@prizzjp</a>）の<br>企画に当選しアマギフ貰いました♪<br>ﾔｯ*｡٩(ˊᗜˋ*)و*｡ｯﾀｰ!<br>ありがとうございます💕<br><br>Prizzさんのおまとめサイトが<br>とてもわかりやすくて簡単！<br>懸賞好きな方はぽちっと<br>サクサク応募しちゃいましょ♪ <a href="https://t.co/fiVtbc6RgV">https://t.co/fiVtbc6RgV</a> <a href="https://t.co/GOxfGN6D2m">pic.twitter.com/GOxfGN6D2m</a></p>&mdash; ぶたぶた（子豚） (@y_emi0123) <a href="https://twitter.com/y_emi0123/status/1173388380312260610?ref_src=twsrc%5Etfw">September 16, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ### 【第9回】2019/9/12
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Prizz I 懸賞まとめサイト様（<a href="https://twitter.com/prizzjp?ref_src=twsrc%5Etfw">@prizzjp</a>）のプレゼント企画にてAmazonギフト券をいただきました💕<br><br>サイト拝見しましたがシンプルでとても見やすく、広告もないので懸賞初めてみたい人にもオススメです🧐！<br>わたしも懸賞大好きなのでこれから利用しようと思います✨<a href="https://twitter.com/hashtag/%E3%82%8A%E3%81%84%E3%81%AE%E5%BD%93%E9%81%B8%E5%A0%B1%E5%91%8A?src=hash&amp;ref_src=twsrc%5Etfw">#りいの当選報告</a> <a href="https://t.co/3ZoPcYht3b">pic.twitter.com/3ZoPcYht3b</a></p>&mdash; りい (@cocobaniiiii) <a href="https://twitter.com/cocobaniiiii/status/1172291683360227329?ref_src=twsrc%5Etfw">September 12, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
+※ Prizzは以前、「Maezawa」という名前でした。
 
 ###【第8回】2019/4/22
 

@@ -4,6 +4,7 @@ import { push } from 'connected-react-router'
 import { showId } from '#/module/id'
 import { setTwitterContents, setTwitterTopCarouselIndex, addTwitterTopCarouselIndex } from '#/module/twitter'
 import TwitterLayout from '#/components/Twitter/TwitterLayout'
+import resolveEndpoint from '#/tools/resolveEndpoint'
 
 const controller = new AbortController()
 
@@ -16,7 +17,7 @@ const mapStateToProps = ({ twitter, categoryList }: {twitter: Twitter, categoryL
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   showId: (id: number) => {
     dispatch(push(`/id/${id}`))
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
+    fetch(resolveEndpoint(`https://api.prizz.jp/search/${id}?raw=true`), { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
         const content = JSON.parse(JSON.stringify(json))
@@ -27,7 +28,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   setTwitterContents: (layout: TwitterLayout) => {
     if (layout.endpoint) {
-      fetch(layout.endpoint)
+      fetch(resolveEndpoint(layout.endpoint))
         .then(response => response.json())
         .then(json => JSON.parse(JSON.stringify(json)))
         .then(contents => {

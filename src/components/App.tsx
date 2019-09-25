@@ -7,14 +7,14 @@ import Twitter from '#/components/Twitter/connectTwitter'
 import TwitterCategory from '#/components/Twitter/Category/connectCategory'
 import Category from '#/components/Category/connectCategory'
 import CinraHeader from '#/components/Layout/CinraHeader'
-// import TwitterLogin from '#/components/Layout/TwitterLogin'
+import TwitterLogin from '#/components/Layout/connectTwitterLogin'
 import Contents from '#/components/Contents'
 
 const App = ({ history }: { history: H.History }) => (
   <ConnectedRouter history={history}>
     <Router>
       <Route component={CinraHeader}/>
-      {/* <Route component={TwitterLogin}/> */}
+      <Route component={TwitterLogin}/>
       <Route exact path='/' component={Home} />
       <Route path='/category/:category' component={Category} />
       <Route exact path='/twitter' component={Twitter} />

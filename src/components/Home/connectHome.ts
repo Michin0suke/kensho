@@ -5,6 +5,7 @@ import { setHomeLayout } from '#/module/home'
 import { setCategoryList } from '#/module/categoryList'
 import { showId } from '#/module/id'
 import Home from '#/components/Home/Home'
+import resolveEndpoint from '#/tools/resolveEndpoint'
 
 const controller = new AbortController()
 
@@ -18,7 +19,7 @@ const mapStateToProps = ({ categoryList, home, id }: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   showId: (id: number) => {
     dispatch(push(`/id/${id}`))
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
+    fetch(resolveEndpoint(`https://api.prizz.jp/search/${id}?raw=true`), { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
         const content = JSON.parse(JSON.stringify(json))

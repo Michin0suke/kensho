@@ -16,6 +16,10 @@ export const setCountdown = (countdown: string) => ({
   type: 'SET_COUNTDOWN',
   countdown
 })
+export const setNextTimeClickable = (nextTime: Date) => ({
+  type: 'SET_NEXTTIME_CLICKABLE',
+  nextTime
+})
 
 const isShow = (state = false, { type }: {type: string}) => {
   switch (type) {
@@ -48,11 +52,18 @@ const countdown = (state = '', { type, countdown }: {type: string, countdown: st
     default: return state
   }
 }
+const nextTimeClickable = (state: Date = new Date(), { type, nextTime }: {type: string, nextTime: Date}) => {
+  switch (type) {
+    case 'SET_NEXTTIME_CLICKABLE': return nextTime
+    default: return state
+  }
+}
 
 export default combineReducers({
   isShow,
   selectedId,
   content,
   limit,
-  countdown
+  countdown,
+  nextTimeClickable
 })

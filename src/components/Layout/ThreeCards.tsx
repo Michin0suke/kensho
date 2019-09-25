@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import media from '#/tools/mediaQuery'
 import Heading, { HeadingBox, HeadingSub } from '#/components/styled/Heading'
 import defaultImage from '#/components/styled/defaultImg'
@@ -24,6 +24,7 @@ const LayoutQuadCards = ({ content, content: { contents }, showId }: Props) => {
             <polygon points="236.51 348.75 139.75 243.25 97.05 295.34 244.29 442.58 479.72 198.06 441.75 160.09 236.51 348.75" style={{ fill: '#fff' }}/>
           </svg>
         </VisitedIcon>
+        {/* <IsOneClick>ONECLICK!</IsOneClick> */}
         <Name>{contents[i].name}</Name>
       </OuterTile>
     )
@@ -121,6 +122,7 @@ const VisitedIcon = styled.a`
     background-color: #E70D6E;
   }
 `
+
 // <rect x="0.5" y="0.5" width="551.43" height="551.43" rx="275.71" style={{ fill: '#FF7EAA' }}/>
 
 export default LayoutQuadCards

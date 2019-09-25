@@ -1,17 +1,19 @@
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { hideId, setLimit, setCountdown } from '../../module/id'
+import { hideId, setLimit, setCountdown, setNextTimeClickable } from '../../module/id'
 import { push, goBack } from 'connected-react-router'
 import Id from './Id'
 import countDown, { dateToStr } from './CountDown'
 
-const mapStateToProps = ({ categoryList, id }: {categoryList: {}, id: any, home: any}) => ({
+const mapStateToProps = ({ categoryList, id, login }: {categoryList: {}, id: any, home: Home, login: any}) => ({
   selectedId: id.selectedId,
   isShow: id.isShow,
   content: id.content,
   categoryList,
   limit: id.limit,
-  countdown: id.countdown
+  countdown: id.countdown,
+  nextTimeClickable: id.nextTimeClickable,
+  isTwitterLogin: login.twitter.isLoggedIn
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -31,6 +33,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   setCountdown: (limit: Date) => {
     dispatch(setCountdown(countDown(limit)))
+  },
+
+  setNextTimeClickable: (nextTime: Date) => {
+    dispatch(setNextTimeClickable(nextTime))
   }
 })
 

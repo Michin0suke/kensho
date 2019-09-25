@@ -4,6 +4,7 @@ import { push } from 'connected-react-router'
 import { showId } from '#/module/id'
 import { setHomeContents, setHomeTopCarouselIndex, addHomeTopCarouselIndex } from '#/module/home'
 import HomeLayout from '#/components/Home/HomeLayout'
+import resolveEndpoint from '#/tools/resolveEndpoint'
 
 const controller = new AbortController()
 
@@ -17,7 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   showId: (id: number) => {
     dispatch(push(`/id/${id}`))
     console.log(id)
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
+    fetch(resolveEndpoint(`https://api.prizz.jp/search/${id}?raw=true`), { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
         const content = JSON.parse(JSON.stringify(json))
@@ -28,7 +29,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   setHomeContents: (layout: HomeLayout) => {
     if (layout.endpoint) {
-      fetch(layout.endpoint)
+      fetch(resolveEndpoint(layout.endpoint))
         .then(response => response.json())
         .then(json => JSON.parse(JSON.stringify(json)))
         .then(contents => {

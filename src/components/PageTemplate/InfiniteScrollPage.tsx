@@ -6,6 +6,12 @@ import { setCategoryList } from '#/module/categoryList'
 import { showId } from '#/module/id'
 import Home from '#/components/Home/Home'
 
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
+import Id from '#/components/Id/connectId'
+import HomeLayout from '#/components/Layout/Layout'
+
 const controller = new AbortController()
 
 const mapStateToProps = ({ categoryList, home, id }: State) => ({
@@ -18,7 +24,7 @@ const mapStateToProps = ({ categoryList, home, id }: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   showId: (id: number) => {
     dispatch(push(`/id/${id}`))
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
+    fetch(resolveEndpoint(`https://api.prizz.jp/search/${id}?raw=true`), { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
         const content = JSON.parse(JSON.stringify(json))
@@ -44,14 +50,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
-
-
-
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { Helmet } from 'react-helmet'
-import Id from '#/components/Id/connectId'
-import HomeLayout from '#/components/Layout/Layout'
 
 interface Props {
   // from Redux

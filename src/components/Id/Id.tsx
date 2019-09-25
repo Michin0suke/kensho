@@ -3,21 +3,36 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import media from '#/tools/mediaQuery'
+import resolveEndpoint from '#/tools/resolveEndpoint'
+import parseTwitterAction, { actionToJapaneseLong, TwitterURL } from '#/tools/parseTwitterAction'
+import { setNextTimeClickable } from '#/module/id'
+import dateCal from '#/tools/dateCal'
 
 interface Props {
   hideId: () => null
   setLimit: (limit: Date) => null
   setCountdown: (limit: Date) => null
   goCategory: (url: string) => null,
+  setNextTimeClickable: (nextTime: Date) => null,
+  nextTimeClickable: Date,
   selectedId: number,
   isShow: boolean,
   content: IdContent,
   categoryList: {[key: string]: string},
   limit: string,
   countdown: string
+  isTwitterLogin: boolean
+}
+
+interface TwitterActions {
+  isDone: boolean,
+  isFetching: boolean,
+  title: string,
 }
 
 const Id = (props: Props) => {
+  // const [twitterActions, setTwitterActions] = useState([])
+
   let countdown: number
 
   useEffect(() => {
@@ -37,8 +52,49 @@ const Id = (props: Props) => {
     </Link>
   )
 
+  function fetchTwitterActions () {
+    const alertList: string[] = []
+    if (new Date() < props.nextTimeClickable) {
+      alert('❌ワンクリックで応募機能は3分に一度しか使えません！\n少し待ってからご利用ください🙇‍')
+      return
+    }
+    if (props.content['twitter_way'] && window.confirm('・' + props.content['twitter_way'].map((x: string) => actionToJapaneseLong(x)).join('\n・') + '\nを実行してよろしいですか？')) {
+      const length = props.content['twitter_way'].length
+      props.content['twitter_way'].forEach((way: string) => {
+        const { url, japanese, param }: TwitterURL = parseTwitterAction(way)
+        fetch(resolveEndpoint(url), param)
+          .then(res => res.json())
+          .then(json => {
+            if (json.status === 'success') {
+              alertList.push(`🙆${japanese}しました！`)
+            } else if (json.error && json.error === 'You have already done any actions to this Tweet') {
+              alertList.push(`😳すでに${japanese}しています！`)
+            } else {
+              alertList.push(`❌${japanese}できませんでした！\nリプライはまだ実装してません！\n${json.error}`)
+            }
+            if (length === alertList.length) {
+              alert(alertList.join('\n'))
+            }
+          })
+          .then(() => props.setNextTimeClickable(dateCal.minutes(new Date(), 3)))
+          .catch(e => console.log(e))
+      })
+    }
+  }
+
+  // const twitterActions: any[] = []
+  // if (props.content.is_oneclick === true && props.content.twitter_way) {
+  //   props.content['twitter_way'].map((action: string, i: number) => {
+  //     twitterActions.push(
+  //       <TwitterActionButton onClick={() => fetchTwitterActions(parseTwitterAction(action))} key={i}>
+  //         {actionToJapanese(action)}
+  //       </TwitterActionButton>
+  //     )
+  //   })
+  // }
+
   return (
-    <Wrapper onClick={() => props.hideId()}>
+    <Wrapper>
       <Helmet
         title={`Prizz 懸賞まとめ | ${props.content.name}`}
         meta={[
@@ -49,7 +105,9 @@ const Id = (props: Props) => {
           { property: 'og:url', content: `https://prizz.jp/id/${props.selectedId}` }
         ]}
       />
+      <Background onClick={() => props.hideId()}/>
       <ContentBox>
+        <ClossIcon onClick={() => props.hideId()} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.57 25.57"><circle cx="12.79" cy="12.79" r="12.79" style={{ fill: '#b2b2b2' }}/><line x1="7" y1="7" x2="18.57" y2="18.57" style={{ fill: 'none', stroke: '#fff', strokeMiterlimit: 10, strokeWidth: '2px' }}/><line x1="7" y1="18.57" x2="18.57" y2="7" style={{ fill: 'none', stroke: '#fff', strokeMiterlimit: 10, strokeWidth: '2px' }}/></ClossIcon>
         <Image src={props.content.image_url} alt={props.content.name} style={{ backgroundImage: 'url(https://prizz.jp/assets/img/defaultImg.svg)' }}/>
         <Name>{props.content.name}</Name>
         <Winner>当選人数: {props.content.winner}人</Winner>
@@ -59,7 +117,18 @@ const Id = (props: Props) => {
         </Time>
         <Provider>企画: {props.content.provider}</Provider>
         <Category>カテゴリ: {categories}</Category>
-        <Button>応募する！<ExLink href={props.content.link} target='_brank' /></Button>
+        {props.content.is_oneclick
+          ? <TwitterActionButton onClick={() => {
+            if (props.isTwitterLogin) {
+              fetchTwitterActions()
+            } else {
+              alert('ワンクリックで応募はツイッターでログインしないと利用できません！')
+            }
+          }} >
+            ワンクリックで応募！
+          </TwitterActionButton> : ''
+        }
+        <Button>応募ページへ！<ExLink href={props.content.link} target='_brank' /></Button>
       </ContentBox>
     </Wrapper>
   )
@@ -68,15 +137,12 @@ const Id = (props: Props) => {
 export default Id
 
 const Wrapper = styled.div`
-  top: 0;
-  left: 0;
   position: fixed;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   z-index: 1000;
-  background-color: rgba(0,0,0,0.4);
   
   animation: fade-in 0.3s ease forwards;
   &:active {
@@ -91,8 +157,26 @@ const Wrapper = styled.div`
     100% { opacity: 0 }
   }
 `
+const ClossIcon = styled.svg`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+`
+const Background = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+`
 const ContentBox = styled.div`
-  position: relative;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
   width: 85%;
   ${media.greaterThan('large')`
     width: 50%;
@@ -100,7 +184,7 @@ const ContentBox = styled.div`
   height: auto;
   max-height: 82%;
   border-radius: 10px;
-  margin: 60px auto 0px;
+  margin: 0 auto;
   padding: 16px;
   background-color: white;
   z-index: 110;
@@ -108,44 +192,46 @@ const ContentBox = styled.div`
   -webkit-overflow-scrolling: touch;
 `
 const Image = styled.img`
-  width: 35vw;
-  height: 35vw;
+  width: auto;
+  height: 30vw;
   ${media.greaterThan('large')`
-    width: 20vw;
-    height: 20vw;
+    width: auto;
+    height: 16vw;
   `}
   display: block;
   margin: 0 auto;
-  border: solid 2px whitesmoke;
+  /* border: solid 2px whitesmoke; */
   border-radius: 10px;
-  color: rgba(0,0,0,0)
+  color: rgba(0,0,0,0);
+  background-size: contain;
+  background-repeat: no-repeat;
 `
 const Name = styled.h1`
   font-size: 20px;
 `
 const Winner = styled.p`
-  font-size: 16px;
+  font-size: 14px;
 `
 const Way = styled.p`
-  font-size: 16px;
+  font-size: 14px;
 `
 const Time = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
 const Limit = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
 `
 const CountDown = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
 `
 const Provider = styled.p`
-  font-size: 16px;
+  font-size: 14px;
 `
 const Category = styled.div`
-  font-size: 16px;
+  font-size: 14px;
 `
 const CategoryButton = styled.div`
   display: inline-block;
@@ -157,12 +243,25 @@ const CategoryButton = styled.div`
   margin: 2px 0px 2px 7px;
   text-decoration: none;
 `
+const TwitterActionButton = styled.div`
+  display: table;
+  text-align: center;
+  font-weight: bold;
+  padding: 14px 30px;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 3px;
+  margin: 10px auto 0;
+  text-decoration: none;
+  border-radius: 10px;
+`
 const Button = styled.div`
   position: relative;
   width: 50%;
   height: 40px;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
   padding-top: 10px;
   font-size: 20px;
   font-weight: bold;

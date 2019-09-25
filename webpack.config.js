@@ -34,6 +34,7 @@ module.exports = {
                 '@babel/preset-typescript'
               ],
               plugins: [
+                '@babel/plugin-proposal-optional-chaining',
                 '@babel/plugin-proposal-class-properties',
                 'babel-plugin-styled-components',
                 '@babel/plugin-transform-object-assign',

@@ -5,7 +5,8 @@ import { showId } from '#/module/id'
 import { setTwitterCategoryContents } from '#/module/twitterCategory'
 import { setCategoryList } from '#/module/categoryList'
 import Category from '#/components/Twitter/Category/Category'
-import join from '#/tools/joinQuery'
+import joinParams from '#/tools/joinQuery'
+import resolveEndpoint from '#/tools/resolveEndpoint'
 
 const controller = new AbortController()
 
@@ -20,7 +21,7 @@ const mapStateToProps = ({ twitterCategory, id, categoryList }: {twitterCategory
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   showId: (id: number) => {
     dispatch(push(`/id/${id}`))
-    fetch(`https://api.prizz.jp/search/${id}`, { signal: controller.signal })
+    fetch(resolveEndpoint(`https://api.prizz.jp/search/${id}?raw=true`), { signal: controller.signal })
       .then(responce => responce.json())
       .then(json => {
         const content = JSON.parse(JSON.stringify(json))
@@ -37,7 +38,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       order: 'deadline',
       way: 'twitter'
     }
-    fetch(join('https://api.prizz.jp/contents', params))
+    fetch(joinParams(resolveEndpoint('https://api.prizz.jp/contents'), params))
       .then(responce => responce.json())
       .then(json => {
         let contents: {[key: string]: [{}]} = {}
