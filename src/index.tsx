@@ -12,6 +12,7 @@ import '#/style.css'
 
 const history = createBrowserHistory()
 console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV)
+console.log('hello')
 
 let store: any
 // const middlewares = [routerMiddleware(history), logger]

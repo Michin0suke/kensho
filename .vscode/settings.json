@@ -2,30 +2,38 @@
   "git.ignoreLimitWarning": true,
   "eslint.nodePath": "./node_modules/eslint",
   "eslint.run": "onSave",
-  "eslint.autoFixOnSave": true,
+  // "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,
   "eslint.enable": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    {
-      "language": "typescript",
-      "autoFix": true
-    },
-    {
-      "language": "typescriptreact",
-      "autoFix": true
-    }
-  ],
-  "vim.easymotion": true,
-  "vim.sneak": true,
-  "vim.incsearch": true,
-  "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
-  "vim.hlsearch": true,
-  "vim.handleKeys": {
-    "<C-h>": true
-  }
+  // "eslint.validate": [
+  //   "javascript",
+  //   "javascriptreact",
+  //   {
+  //     "language": "typescript",
+  //     "autoFix": true
+  //   },
+  //   {
+  //     "language": "typescriptreact",
+  //     "autoFix": true
+  //   }
+  // ],
+  // "vim.easymotion": true,
+  // "vim.sneak": true,
+  // "vim.incsearch": true,
+  // "vim.useSystemClipboard": true,
+  // "vim.useCtrlKeys": true,
+  // "vim.hlsearch": true,
+  // "vim.handleKeys": {
+  //   "<C-h>": true
+  // },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "Cinra",
+    "Prizz",
+    "kensho"
+  ]
   // "vim.insertModeKeyBindings": [
   //   {
   //     "before": ["j", "j"],

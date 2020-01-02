@@ -1,9 +1,9 @@
 {
+  "name": "kensho",
+  "license": "UNLICENSED",
   "private": true,
   "descaription": "fugafuga",
-  "name": "kensho",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "babel src -d dest",
@@ -27,7 +27,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
@@ -59,10 +58,6 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/react-transition-group": "^4.2.2",
     "@types/redux-logger": "^3.0.7",
-    "@types/storybook__addon-actions": "^3.4.3",
-    "@types/storybook__addon-info": "^4.1.2",
-    "@types/storybook__addon-knobs": "^5.0.3",
-    "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "^4.1.18",
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
@@ -76,7 +71,7 @@
     "babel-upgrade": "^1.0.1",
     "browserslist": "^4.6.6",
     "connected-react-router": "^6.5.2",
-    "core-js": "^3.1.4",
+    "core-js": "^3.6.1",
     "create-react-app": "^3.0.1",
     "css-loader": "^2.1.1",
     "enzyme": "^3.10.0",
@@ -93,26 +88,13 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-typescript": "^0.14.0",
-    "express": "^4.17.1",
     "file-loader": "^4.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-clean-css": "^4.2.0",
-    "gulp-debug": "^4.0.0",
-    "gulp-notify": "^3.2.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sftp-up4": "^0.1.8",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-typescript": "^5.0.1",
-    "node-sass": "^4.12.0",
-    "npm-why": "^1.1.7",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-docgen-typescript-loader": "^3.1.1",
     "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
     "react-infinite": "^0.13.0",
     "react-infinite-scroll-component": "^4.5.2",
     "react-redux": "^7.1.0",
@@ -137,7 +119,5 @@
     "webpack-dev-server": "^3.7.2",
     "whatwg-fetch": "^3.0.0"
   },
-  "dependencies": {
-    "react-helmet": "^5.2.1"
-  }
+  "dependencies": {}
 }

@@ -1,0 +1,4 @@
+User-agent : *
+Disallow :
+Sitemap : https://prizz.jp/assets/sitemap/sitemap_mobile.xml
+Sitemap : https://prizz.jp/assets/sitemap/sitemap_pc.xml

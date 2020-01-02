@@ -16,7 +16,7 @@ interface Props {
 
 const Contents = ({ match: { params: { contents } } }: Props) => (
   <div>
-    <Header>懸賞を追加する</Header>
+    <Header>contents</Header>
     <Link to='/'><Goback/></Link>
     <Body src={`/contents_dir/${contents}.html`}/>
   </div>
